@@ -1,0 +1,216 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Wizard</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a>Forms</a>
+                    </li>
+                    <li class="active">
+                        <strong>Wizard</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Upload Artwork</h5>
+                        </div>
+                        <div class="ibox-content wizard">
+                            <div class="steps clearfix">
+                                <ul>
+
+                                    <li ui-sref-active="current">
+                                        <a ui-sref="upload.step_one" class=" btn btn-default"><span>1</span> Account information</a>
+                                    </li>
+                                    <li ui-sref-active="current">
+                                        <a ui-sref="upload.step_two" class="btn btn-default"><span>2</span> Profile Information</a>
+                                    </li>
+                                    <li ui-sref-active="current">
+                                        <a ui-sref="upload.step_three" class="btn btn-default"><span>3</span> Terms and Conditions</a>
+                                        <a ui-sref="upload.step_three" class="btn_home btn-mod btn-w btn-medium btn-round lightbox mfp-iframe">More Info</a>
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="wizard">
+                                <div class="content">
+
+                                    <form name="signupForm" ng-submit="processForm()" class="p-lg">
+
+                                        <!-- our nested state views will be injected here -->
+                                        <div id="form-views" ui-view></div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Main view  -->
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Upload</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <strong>Upload</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title  back-change">
+                            <h5>1. <small>Upload a photo</small></h5>
+                        </div>
+                        <div class="ibox-content">
+                            <p>
+                                Simple Image Crop directive for AngularJS. Enables to crop a circle or a square out of an image.
+                            </p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="m-b-md"><input type="file" id="fileInput" /></div>
+                                    <div class="cropArea">
+                                        <img-crop area-type="square" image="myImage" result-image="myCroppedImage"></img-crop>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>2.
+                                <small>Add some details</small>
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="get" class="form-horizontal">
+                                <div class="form-group"><label class="col-sm-2 control-label">Title</label>
+
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+
+                                    <div class="col-sm-10"><input type="text" class="form-control"></div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Areas</label>
+
+                                    <div class="col-sm-10">
+                                        <div>
+                                            <select multiple chosen class="chosen-select"  tabindex="4">
+                                                <option value="">Select</option>
+                                                <option value="United States">Back</option>
+                                                <option value="United Kingdom">Shoulder</option>
+                                                <option value="Afghanistan">Arm</option>
+                                                <option value="Aland Islands">Wrist</option>
+                                                <option value="Aland Islands">Neck</option>
+                                                <option value="Aland Islands">Face</option>
+                                                <option value="Aland Islands">Lower Back</option>
+                                                <option value="Aland Islands">Thigh</option>
+                                                <option value="Aland Islands">Ankle</option>
+                                                <option value="Aland Islands">Foot</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group"><label class="col-sm-2 control-label">Price </br><small>$ {{price}}</small></label>
+
+                                    <div class="col-sm-10">
+                                        <div class="row m-b-lg">
+                                            <div class="col-lg-12" ng-init="price">
+                                                <div slider ng-model="price" start=1 end=5000></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div ng-include="'views/common/footer.html'"></div>
+
+    </div>
+    <!-- End page wrapper-->
+
+</div>
+<!-- End wrapper-->
+
+<style>
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width:500px;
+        height:350px;
+    }
+</style>
+<script>
+    angular.module('app', ['ngImgCrop'])
+        .controller('Ctrl', function($scope) {
+            $scope.myImage='';
+            $scope.myCroppedImage='';
+
+            var handleFileSelect=function(evt) {
+                var file=evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function($scope){
+                        $scope.myImage=evt.target.result;
+                    });
+                };
+                reader.readAsDataURL(file);
+            };
+            angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+        });
+</script>
+<script>
+    $("#wizard").steps();
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+</head>
+<body>
+    <div class="overview" ng-controller="overviewCtrl">
+        <h1>POLES</h1>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="imageContainer col-md-4" ng-repeat="line in lines">
+                    <div class="ibox">
+                        <div class="ibox-content" style="background-image: url('data/pole_{{line.poleDetection.PoleID}}/0.png')" ng-click="openModal(line)">
+
+                        </div>
+
+                        <div class="ibox-title" style={{ColorBars(line.poleDetection.Priority)}}>
+                            <h4>Priority: {{line.poleDetection.Priority}}</h4>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
+
+<!--<script type="text/javascript">
+    window.onload = function () {
+        window.document.body.onload = ColorTitles;
+        console.log("TRIGGERED");
+    }
+
+    function ColorTitles() {
+        console.log("COLORTITLES");
+        var dom_el = document.querySelector('[ng-controller="overviewCtrl"]');
+        var ng_el = angular.element(dom_el);
+        var ng_el_scope = ng_el.scope();
+
+        var iboxTitleArray = document.getElementsByClassName('ibox-title');
+
+        console.log(iboxTitleArray);
+
+        console.log(ng_el_scope.lines);
+
+        for (x in ng_el_scope.lines) {
+            console.log(x);
+
+            if (ng_el_scope.lines[x].poleDetection.Priority == 3) {
+                iboxTitleArray[x].style.color = "red";
+            } else if (ng_el_scope.lines[x].poleDetection.Priority == 2) {
+                iboxTitleArray[x].style.color = "yellow";
+            } else if (ng_el_scope.lines[x].poleDetection.Priority == 1) {
+                iboxTitleArray[x].style.color = "green";
+            }
+        }
+    }
+</script>-->

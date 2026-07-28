@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Inventory</h2>
+
+    <form method="get">
+        <input name="search" placeholder="Search by item or category" value="{{ search }}">
+        <button type="submit">Search</button>
+        <a class="button secondary" href="{{ url_for('inventory') }}">Clear</a>
+        {% if session.get("role") in ["admin", "manager"] %}
+            <a class="button" href="{{ url_for('add_item') }}">Add Item</a>
+        {% endif %}
+    </form>
+</div>
+
+<div class="card">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Minimum Stock</th>
+            <th>Status</th>
+            {% if session.get("role") in ["admin", "manager"] %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.quantity }} {{ item.unit_type }}</td>
+            <td>{{ item.minimum_stock }} {{ item.unit_type }}</td>
+            <td>
+                {% if item.quantity <= item.minimum_stock %}
+                    <span class="low">Low Stock</span>
+                {% else %}
+                    In Stock
+                {% endif %}
+            </td>
+            {% if session.get("role") in ["admin", "manager"] %}
+                <td><a class="button" href="{{ url_for('edit_item', item_id=item.id) }}">Edit</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

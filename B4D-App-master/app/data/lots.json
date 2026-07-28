@@ -1,0 +1,139 @@
+{
+  "lines": {
+    "1": {
+      "preview": "1.png",
+      "location": {
+        "lat": 38.884458,
+        "long": -104.803698
+      },
+      "details": {
+        "name": "Line 1",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/18/18",
+        "time":  "12:03:50"
+      }
+    },
+    "2": {
+      "preview": "2.png",
+      "location": {
+        "lat": 30,
+        "long": 114
+      },
+      "details": {
+        "name": "Line 2",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/16/18",
+        "time": "07:40:20"
+      }
+    },
+    "3": {
+      "preview": "3.png",
+      "location": {
+        "lat": 42,
+        "long": -107.5
+      },
+      "details": {
+        "name": "Line 3",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/17/18",
+        "time": "11:03:50"
+      }
+    },
+    "4": {
+      "preview": "4.jpg",
+      "location": {
+        "lat": 30,
+        "long": 52
+      },
+      "details": {
+        "name": "Line 4",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/18/18",
+        "time": "12:13:50"
+      }
+    },
+    "5": {
+      "preview": "5.png",
+      "location": {
+        "lat": 40,
+        "long": -114
+      },
+      "details": {
+        "name": "Line 5",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/18/18",
+        "time": "12:53:50"
+      }
+    },
+    "6": {
+      "preview": "6.jpg",
+      "location": {
+        "lat": 55,
+        "long": -114
+      },
+      "details": {
+        "name": "Line 6",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/16/18",
+        "time": "10:33:30"
+      }
+    },
+    "7": {
+      "preview": "7.jpg",
+      "location": {
+        "lat": 32,
+        "long": -104
+      },
+      "details": {
+        "name": "Line 7",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/17/18",
+        "time": "05:03:50"
+      }
+    },
+    "8": {
+      "preview": "8.jpg",
+      "location": {
+        "lat": 51,
+        "long": -74
+      },
+      "details": {
+        "name": "Line 8",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/17/18",
+        "time": "15:03:50"
+      }
+    },
+    "9": {
+      "preview": "9.jpg",
+      "location": {
+        "lat": 58,
+        "long": -14
+      },
+      "details": {
+        "name": "Line 9",
+        "description": "Near Downtown"
+      },
+      "timestamp": {
+        "date": "3/16/18",
+        "time": "10:23:20"
+      }
+    }
+  }
+}

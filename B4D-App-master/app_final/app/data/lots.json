@@ -1,0 +1,70 @@
+{
+  "lines": {
+    "1": {
+      "preview": "1.png",
+      "location":{
+        "lat": 38.884458,
+        "long": -104.803698
+      },
+      "details": {
+        "name": "Line 1",
+        "description": "Near Downtown"
+      }
+    },
+    "2": {
+      "preview": "2.png",
+      "location":{
+        "lat": 30,
+        "long": 114
+      },
+      "details": {
+        "name": "Line 2",
+        "description": "Near Downtown"
+      }
+    },
+    "3": {
+      "preview": "3.png",
+      "location":{
+        "lat": 42,
+        "long": -107.5
+      },
+      "details": {
+        "name": "Line 3",
+        "description": "Near Downtown"
+      }
+    },
+    "4": {
+      "preview": "1.png",
+      "location":{
+        "lat": 30,
+        "long": 52
+      },
+      "details": {
+        "name": "Line 4",
+        "description": "Near Downtown"
+      }
+    },
+    "5": {
+      "preview": "2.png",
+      "location":{
+        "lat": 40,
+        "long": -114
+      },
+      "details": {
+        "name": "Line 5",
+        "description": "Near Downtown"
+      }
+    },
+    "6": {
+      "preview": "3.png",
+      "location":{
+        "lat": 55,
+        "long": -114
+      },
+      "details": {
+        "name": "Line 6",
+        "description": "Near Downtown"
+      }
+    }
+  }
+}

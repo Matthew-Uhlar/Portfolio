@@ -1,0 +1,26 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav metismenu" id="side-menu">
+            <li ui-sref-active="active" ng-class="{active: $state.includes('.overview')}" style="border-bottom: 1px solid grey">
+                <a ui-sref="app.overview">
+                    <i class="fa fa-building"></i>
+                    <span class="nav-label">Distribution Network</span>
+                </a>
+            </li>
+
+            <li ui-sref-active="active" ng-class="{active: $state.includes('.map')}" style="border-bottom: 1px solid grey">
+                <a ui-sref="app.map">
+                    <i class="fa fa-map"></i>
+                    <span class="nav-label">Map View</span>
+                </a>
+            </li>
+
+            <!--<li ui-sref-active="active" ng-class="{active: $state.includes('.list_view')}" style="border-bottom: 1px solid grey">
+                <a ui-sref="app.list_view">
+                    <i class="fa fa-list"></i>
+                    <span class="nav-label">List</span>
+                </a>
+            </li>-->
+        </ul>
+    </div>
+</nav>

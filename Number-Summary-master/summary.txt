@@ -1,0 +1,9 @@
+Number Summary:
+min: -9.45
+max: 4.99
+mean: -2.4
+median: -3.9
+q1: -5.5
+q3: 1.6
+mode: [-4.73, 1.59]
+sigma: 4.8

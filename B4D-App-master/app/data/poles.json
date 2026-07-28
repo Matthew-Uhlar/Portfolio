@@ -1,0 +1,110 @@
+[
+  {
+    "poleDetection": {
+      "Color": 1,
+      "Priority": 1,
+      "GPSposition": [
+        36.15518134709153,
+        -90.76177311573255
+      ],
+      "timestampSec": 1521049162,
+      "PoleID": 0
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.15505953316918,
+        -90.76208636558252
+      ],
+      "PoleID": 1,
+      "Priority": 1,
+      "timestampSec": 1521049221
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.15484944120839,
+        -90.76194658815945
+      ],
+      "PoleID": 2,
+      "Priority": 1,
+      "timestampSec": 1521049324
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.15530103866951,
+        -90.76219900157987
+      ],
+      "PoleID": 3,
+      "Priority": 0,
+      "timestampSec": 1521049388
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.155557738799914,
+        -90.76233439198927
+      ],
+      "PoleID": 4,
+      "Priority": 2,
+      "timestampSec": 1521049445
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.15581274388398,
+        -90.7624485923679
+      ],
+      "PoleID": 5,
+      "Priority": 0,
+      "timestampSec": 1521049626
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.15575233904169,
+        -90.76214706747537
+      ],
+      "PoleID": 6,
+      "Priority": 0,
+      "timestampSec": 1521049570
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.15607380549469,
+        -90.76258941509835
+      ],
+      "PoleID": 7,
+      "Priority": 3,
+      "timestampSec": 1521049668
+    }
+  },
+  {
+    "poleDetection": {
+      "Color": 1,
+      "GPSposition": [
+        36.15598081060328,
+        -90.76290732513831
+      ],
+      "PoleID": 8,
+      "Priority": 0,
+      "timestampSec": 1521049763
+    }
+  }
+]

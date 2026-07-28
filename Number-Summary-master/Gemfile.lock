@@ -1,0 +1,14 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    yard (0.8.7.6)
+
+PLATFORMS
+  ruby
+  x64-mingw32
+
+DEPENDENCIES
+  yard
+
+BUNDLED WITH
+   1.10.6

@@ -1,0 +1,50 @@
+<div class="registration-bg">
+    <div class="main-content-register">
+        <div class="middle-box text-center loginscreen animated fadeInDown">
+            <div >
+                <div>
+
+                    <img class="bg-brand-sm mb-30 mt-30" src="img/b4dlog.png">
+
+                </div>
+
+                <div>
+                    <h3>Register to B4D</h3>
+                    <p>Please give us some basic information so we can set up your profile.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle-box text-center loginscreen animated fadeInDown">
+            <form class=" " role="form" style="margin-top:50px">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="User.first_name" style="color:dimgrey" placeholder="First Name" required="">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="User.last_name" style="color:dimgrey" placeholder="Last Name" required="">
+                </div>
+                <div class="form-group">
+                    <input type="phone" class="form-control" ng-model="User.phone" style="color:dimgrey" placeholder="Phone Number" required="">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" ng-model="User.email" style="color:dimgrey" placeholder="Email" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="User.password" style="color:dimgrey" placeholder="Password" required="">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="User.license" style="color:dimgrey" placeholder="License Number" required="">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox i-checks"><label> <input type="checkbox" ng-model="RegAgreed"><i></i> Agree the terms and policy </label></div>
+                </div>
+                <button type="submit" class="mb-50 reg_btn_dis btn-mod btn-medium btn-round btn-block" ng-if="RegAgreed != true" style="margin-bottom:20px">Register</button>
+                <button type="submit" ng-click="register()" class="mb-50 reg_btn btn-mod btn-medium btn-round btn-block" ng-if="RegAgreed == true" style="margin-bottom:20px">Register</button>
+
+                <p class="text-muted text-center"><small>Already have an account?</small></p>
+                <a class="home_btn btn-mod btn-w btn-medium btn-round btn-block" ng-click="goToLogin()">Login</a>
+            </form>
+        </div>
+        <p class="text-center" ng-if="regCategory != 'choose'"> <small>Brains4Drones &copy; 2018</small> </p>
+    </div>
+</div>

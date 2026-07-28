@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>Submit Supply Request</h2>
+    <form method="post">
+        <label>Inventory Item</label>
+        <select name="item_id" required>
+            {% for item in items %}
+                <option value="{{ item.id }}">{{ item.name }} | {{ item.category }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Requested Quantity</label>
+        <input name="requested_quantity" type="number" min="1" required>
+
+        <label>Notes</label>
+        <textarea name="notes" rows="3"></textarea>
+
+        <button type="submit">Submit Request</button>
+    </form>
+</div>
+
+<div class="card">
+    <h2>Supply Requests</h2>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Requested By</th>
+            <th>Status</th>
+            <th>Created</th>
+            {% if session.get("role") in ["admin", "manager"] %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+        {% for req in requests %}
+        <tr>
+            <td>{{ req.item_name }}</td>
+            <td>{{ req.requested_quantity }}</td>
+            <td>{{ req.requested_by }}</td>
+            <td>{{ req.status }}</td>
+            <td>{{ req.created_at }}</td>
+            {% if session.get("role") in ["admin", "manager"] %}
+            <td>
+                <a class="button" href="{{ url_for('update_request', request_id=req.id, status='Approved') }}">Approve</a>
+                <a class="button danger" href="{{ url_for('update_request', request_id=req.id, status='Denied') }}">Deny</a>
+                <a class="button secondary" href="{{ url_for('update_request', request_id=req.id, status='Completed') }}">Complete</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

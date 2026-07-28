@@ -1,0 +1,103 @@
+<div>
+<div class="navbar-wrapper" >
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="dashboards.dashboard_1"><img src="img/b4dnew.png" style="width:140px; margin-top:7px;"></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div ng-controller="landingCtrl" id="inSlider" class="carousel slide carousel-fade fixedPage" style="color:white">
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="row text-center main_thumb" style="background:transparent">
+                <img class="mb-50 bg-brand" src="img/b4dlog.png">
+                <h1 class="hs-line-9 font_alt mb-50">Automated Drone Surveying</h1>
+                <div class="local-scroll">
+                    <a ng-click="goToRegister()" class="btn_home btn-mod btn-w btn-medium btn-round">Register</a>
+                    <span class="visible-xs mb-30"></br></span>
+                    <span class="hidden-xs">&nbsp;</span>
+                    <a ng-click="goToLogin()" class="btn_home btn-mod btn-w btn-medium btn-round lightbox mfp-iframe">Login</a>
+                </div>
+            </div>
+
+
+            <!-- Set background for slide in css -->
+            <div class="header-back one"></div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Local script for menu handle -->
+<!-- It can be also directive -->
+
+<script>
+    $(document).ready(function () {
+        // Page scrolling feature
+        $('a.page-scroll').bind('click', function(event) {
+            var link = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(link.attr('href')).offset().top - 50
+            }, 500);
+            event.preventDefault();
+            if($('body').hasClass('body-small')) {
+                $('#navbar').collapse('toggle');
+            }
+        });
+
+        // Activate WOW.js plugin for animation on scrol
+        new WOW().init();
+    });
+
+    var cbpAnimatedHeader = (function() {
+        var docElem = document.documentElement,
+                header = document.querySelector( '.navbar-default' ),
+                didScroll = false,
+                changeHeaderOn = 200;
+        function init() {
+            window.addEventListener( 'scroll', function( event ) {
+                if( !didScroll ) {
+                    didScroll = true;
+                    setTimeout( scrollPage, 250 );
+                }
+            }, false );
+        }
+        function scrollPage() {
+            var sy = scrollY();
+            if ( sy >= changeHeaderOn ) {
+                $(header).addClass('navbar-scroll')
+            }
+            else {
+                $(header).removeClass('navbar-scroll')
+            }
+            didScroll = false;
+        }
+        function scrollY() {
+            return window.pageYOffset || docElem.scrollTop;
+        }
+        init();
+
+    })();
+</script>
+<style>
+    body {
+        background-image: url("../img/background_lights.jpg");
+    }
+    .main_thumb {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 700px;
+        height: 700px;
+        margin-top: -200px;
+        margin-left: -350px;
+    }
+</style>

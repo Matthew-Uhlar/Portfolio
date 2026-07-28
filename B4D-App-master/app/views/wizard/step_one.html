@@ -1,0 +1,25 @@
+<fieldset>
+    <h2>Upload Image</h2>
+
+    <div class="row">
+        <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <p>
+                            Simple Image Crop directive for AngularJS. Enables to crop a circle or a square out of an image.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="m-b-md"><input type="file" id="fileInput" /></div>
+                                <div class="cropArea">
+                                    <img-crop area-type="square" image="myImage" result-image="myCroppedImage"></img-crop>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <a ui-sref="dashboards.upload.step_two" class="btn btn-primary">Next</a>
+</fieldset>

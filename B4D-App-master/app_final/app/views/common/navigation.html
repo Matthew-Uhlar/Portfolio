@@ -1,0 +1,19 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav metismenu" id="side-menu">
+            <li ui-sref-active="active" ng-class="{active: $state.includes('.overview')}" style="border-bottom: 1px solid grey">
+                <a ui-sref="app.overview">
+                    <i class="fa fa-building"></i>
+                    <span class="nav-label">Power Lines</span>
+                </a>
+            </li>
+
+            <li ui-sref-active="active" ng-class="{active: $state.includes('.map')}" style="border-bottom: 1px solid grey">
+                <a ui-sref="app.map">
+                    <i class="fa fa-edit"></i>
+                    <span class="nav-label">Map</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

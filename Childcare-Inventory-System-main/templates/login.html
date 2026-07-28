@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width: 420px; margin: 40px auto;">
+    <h2>Login</h2>
+    <p>Use the default demo account to sign in.</p>
+    <form method="post">
+        <label>Username</label>
+        <input name="username" required value="admin">
+
+        <label>Password</label>
+        <input name="password" type="password" required value="admin123">
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,215 @@
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" ng-controller="uploadTest2Ctrl">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        {{blobImage}}
+
+
+                        <div class="text-center m-b-md">
+
+                            <a ng-click="wizard.show(1)" class="btn" ng-class="{ 'btn-primary': step == 1, 'btn-default': step != 1}">Step 1 - Image Upload</a>
+                            <a ng-click="wizard.show(2)" class="btn" ng-class="{ 'btn-primary': step == 2, 'btn-default': step != 2}">Step 2 - Artwork Description</a>
+                            <a ng-click="wizard.show(3)" class="btn" ng-class="{ 'btn-primary': step == 3, 'btn-default': step != 3}">Step 3 - Approval</a>
+
+                        </div>
+
+
+                        <div ng-show="step == 1"  class="p-m">
+
+
+
+                            <div class="row">
+                                <div class="container">
+                                    <div class="col-md-4">
+                                        <input type="file" file-input="files" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-info" ng-click="uploadFile()">Upload</button>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                    <br /><br />
+                                    <div class="col-md-3" ng-repeat="image in images">
+                                        <img ng-src="upload/{{image.name}}" width="200" height="200" style="padding:16px; border:1px solid #f1f1f1; margin:16px;" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div ng-show="step == 2" class="p-m">
+
+                            <div class="row">
+                                <div class="col-lg-3 text-center">
+                                    <div class="m-b-md">
+                                        <div class="thumbnail" ng-show="objNew.files.length">
+                                            <!--<img flow-img="$flow.files[0]" />-->
+                                        </div>
+                                        <div ng-show="!objNew.files.length">
+                                            <i class="fa fa-folder-open fa-5x text-muted"></i>
+                                        </div>
+                                    </div>
+                                    <p class="small m-t-md">
+                                        <strong>Artwork details</strong>
+                                        <br/><br/>Please provide as much detail as possible. The more information we have, the more likely we will be able to fix the issue without bugging you with follow up questions.
+                                    </p>
+                                </div>
+
+
+                                <!--
+                                *****************
+                                DASHBOARD SUPPORT
+                                *****************
+                                -->
+
+                                <div class="col-lg-9">
+                                    <div class="row">
+                                        <form method="get" name="upload" class="form-horizontal">
+
+                                            <div class="form-group"><label class="col-sm-2 control-label">Title</label>
+
+                                                <div class="col-sm-10">
+                                                    <input type="text" ng-model="newUpload.title" name="title" ng-minlength="3" ng-maxlength="20" class="form-control" required>
+                                                    <small class="text-danger" ng-show="upload.title.$error.minlength">Your username is required to be at least 3 characters</small>
+                                                    <small class="text-danger" ng-show="upload.title.$error.maxlength">Your username cannot be longer than 20 characters</small>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Description</label>
+
+                                                <div class="col-sm-10">
+                                                    <input type="text" ng-model="newUpload.description" name="description" ng-minlength="20" ng-maxlength="250" class="form-control" required>
+                                                    <small class="text-danger help-block m-b-none" ng-show="upload.description.$error.minlength">Your description is required to be at least 20 characters</small>
+                                                    <small class="text-danger help-block m-b-none" ng-show="upload.description.$error.maxlength">Your description cannot be longer than 250 characters</small>
+                                                </div>
+
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Areas</label>
+
+                                                <div class="col-sm-10">
+                                                    <div>
+                                                        <select multiple chosen class="chosen-select" ng-model="newUpload.area" tabindex="4">
+                                                            <option value="Back">Back</option>
+                                                            <option value="Shoulder">Shoulder</option>
+                                                            <option value="Arm">Arm</option>
+                                                            <option value="Wrist">Wrist</option>
+                                                            <option value="Neck">Neck</option>
+                                                            <option value="Face">Face</option>
+                                                            <option value="Lowback">Lower Back</option>
+                                                            <option value="Thigh">Thigh</option>
+                                                            <option value="Ankle">Ankle</option>
+                                                            <option value="Foot">Foot</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Price </br><small>$ {{newUpload.price}}</small></label>
+
+                                                <div class="col-sm-10">
+                                                    <div class="row m-b-lg">
+                                                        <div class="col-lg-12" ng-init="price">
+                                                            <div slider ng-model="newUpload.price" start=1 end=5000></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div ng-show="step == 3">
+
+                            <div class="row text-center m-t-lg m-b-lg">
+                                <div class="col-lg-12">
+                                    <!--<div ng-show="$flow.files.length">-->
+                                    <!--<h1 class="m-b-md">{{newUpload.title}}</h1>-->
+                                    <!--<img flow-img="$flow.files[0]" class="preview m-b-md">-->
+                                    <!--<h3 class="text-center">{{newUpload.description}}</h3>-->
+                                    <!--<p>Areas: <span ng-repeat="li in newUpload.area"> <b>{{li}} </b></span></p>-->
+                                    <!--<span class="btn btn-default btn-lg">${{newUpload.price}}</span>-->
+                                    <!--<div class="hr-line-dashed"></div>-->
+                                    <!--</div>-->
+                                    <!--<div ng-show="!$flow.files.length">-->
+                                    <!--<div class="alert alert-warning col-lg-6 col-lg-offset-3">-->
+                                    <!--<h3 class="m-b-md"><i class="fa fa-info-circle"></i> Please upload a file to add new artwork.</h3>-->
+                                    <!--</div>-->
+                                    <!--<div class="clearfix"></div>-->
+                                    <!--</div>-->
+                                    <!--<p class="large m-t-md">-->
+                                    <!--In order to submit artwork, please <strong>accept</strong> our terms of service.-->
+                                    <!--</p>-->
+                                </div>
+                                <i ng-if="approve == false" class="fa fa-check-square-o fa-5x text-muted"></i>
+                                <i ng-if="approve == true" class="fa fa-check-square-o fa-5x text-navy"></i>
+                                <div class="checkbox col-lg-12">
+                                    <input type="checkbox" ng-model="approve">
+                                    Approve this form
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="text-right m-t-xs">
+                            <button ng-click="wizard.prev()" ng-disabled="step == 1" class="btn btn-default">Previous</button>
+                            <button ng-click="wizard.next()" ng-disabled="step == 3" ng-hide="step == 3" class="btn btn-default">Next</button>
+                            <button ng-click="uploadFile($file)" ng-show="step == 3" class="btn btn-success" ng-disabled="!approve">Submit</button>
+                        </div>
+
+
+                        <!--
+                        *****************
+                        UN-COMMENT TO TURN ON DATA SAMPLE
+                        *****************
+                        -->
+
+
+                        <div class="m-t-md">
+
+                            <p ng-if="support.type == 'error'">
+                                We sincerely apologize that you are experiencing an issue. We are going to do our best to solve the issue and make sure you are satisfied with our services.
+                            </p>
+                            <p ng-if="support.type == 'feedback'">
+                                We greatly appreciate your feedback and/or recommendations. Let us look over your request and see what we can do. We are here to serve you.
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    .preview {
+        height:200px;
+        width:auto;
+    }
+    .my-drop-zone { border: dotted 3px lightgray; }
+    .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+    .another-file-over-class { border: dotted 3px green; }
+
+    html, body { height: 100%; }
+
+    canvas {
+        background-color: #f3f3f3;
+        -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+        -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+        box-shadow: 3px 3px 3px 0 #e3e3e3;
+        border: 1px solid #c3c3c3;
+        height: 100px;
+        margin: 6px 0 0 6px;
+    }
+</style>

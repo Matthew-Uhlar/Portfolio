@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Childcare Inventory System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+            color: #222;
+        }
+        header {
+            background: #1f4e79;
+            color: white;
+            padding: 16px 24px;
+        }
+        nav {
+            background: #173a59;
+            padding: 10px 24px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 18px;
+            font-weight: bold;
+        }
+        main {
+            max-width: 1100px;
+            margin: 24px auto;
+            padding: 0 18px;
+        }
+        .card {
+            background: white;
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            margin-bottom: 18px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #eef3f7;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 14px;
+            box-sizing: border-box;
+        }
+        button, .button {
+            background: #1f4e79;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button.secondary {
+            background: #666;
+        }
+        .button.danger {
+            background: #9a2f2f;
+        }
+        .alert {
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 14px;
+        }
+        .success { background: #d7f5df; }
+        .danger { background: #f8d7da; }
+        .warning { background: #fff3cd; }
+        .info { background: #d9edf7; }
+        .low {
+            color: #9a2f2f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Childcare Center Inventory Management System</h1>
+</header>
+
+{% if session.get("user") %}
+<nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('inventory') }}">Inventory</a>
+    <a href="{{ url_for('requests_page') }}">Supply Requests</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</nav>
+{% endif %}
+
+<main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

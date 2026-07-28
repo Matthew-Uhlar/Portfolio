@@ -1,0 +1,23 @@
+<div class="overview" ng-controller="overviewCtrl">
+    <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="imageContainer col-md-4" ng-repeat="line in lines">
+        <div class="ibox">
+            <div class="ibox-content" style="background-image: url('data/images/{{line.preview}}')" ng-click="openModal(line)">
+
+            </div>
+            <div class="ibox-title">
+                <h4>{{line.details.name}}</h4>
+            </div>
+
+
+        </div>
+        </div>
+
+    </div>
+    </div>
+
+
+</div>
+
+

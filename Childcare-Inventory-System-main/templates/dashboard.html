@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid">
+    <div class="card">
+        <h2>Total Inventory Items</h2>
+        <p style="font-size: 32px;">{{ total_items }}</p>
+    </div>
+    <div class="card">
+        <h2>Logged In</h2>
+        <p>{{ session.get("user") }} | {{ session.get("role") }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Low Stock Alerts</h2>
+    {% if low_stock %}
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Minimum</th>
+            </tr>
+            {% for item in low_stock %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.category }}</td>
+                <td class="low">{{ item.quantity }} {{ item.unit_type }}</td>
+                <td>{{ item.minimum_stock }} {{ item.unit_type }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No low stock items right now.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h2>Pending Supply Requests</h2>
+    {% if pending_requests %}
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Requested By</th>
+                <th>Status</th>
+            </tr>
+            {% for req in pending_requests %}
+            <tr>
+                <td>{{ req.item_name }}</td>
+                <td>{{ req.requested_quantity }}</td>
+                <td>{{ req.requested_by }}</td>
+                <td>{{ req.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No pending requests.</p>
+    {% endif %}
+</div>
+{% endblock %}

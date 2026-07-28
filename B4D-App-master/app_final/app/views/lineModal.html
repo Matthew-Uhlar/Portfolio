@@ -1,0 +1,62 @@
+    <div class="fancymodal-content" id="lineModal" style="padding: 30px; margin-top:10px">
+        <div class="lineTitle">
+            <h5>
+                {{line.details.name}}
+            </h5>
+        </div>
+        <div id="map"></div>
+
+
+
+
+
+
+        <div class="lineDetails" style="padding-top:100px">
+            <div class="lineDescription col-sm-6">
+                <h4>Description</h4>
+                <p>{{line.details.description}}</p>
+            </div>
+
+            <div class="lineImage col-sm-6">
+                <img src="data/images/{{line.preview}}" alt="">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+
+        <script>
+            var dom_el = document.querySelector('[ng-controller="overviewCtrl"]');
+            var ng_el = angular.element(dom_el);
+            var ng_el_scope = ng_el.scope();
+            var latitude = ng_el_scope.line.location.lat;
+            var longitude = ng_el_scope.line.location.long;
+
+            function initMap() {
+                var uluru = {lat: latitude, lng: longitude};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
+        </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU_Aj35e33uw5drn4Fv0r98LsOiaTq6QQ&callback=initMap">
+    </script>
+    <style>
+        #map {
+            height: 200px;
+            width: 100%;
+        }
+    </style>

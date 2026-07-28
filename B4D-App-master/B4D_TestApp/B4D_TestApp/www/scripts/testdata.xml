@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dronedata>
+	<obj id="0">
+		<url>/images/protoProta.png</url>
+		<date>11/23/17</date>
+		<time>11:32:08</time>
+		<loc>
+			<lat>75.9879</lat>
+			<long>65.676768</long>
+		</loc>
+	</obj>
+	<obj id="1">
+		<url>../images/protoEnemy.png</url>
+		<date>11/24/17</date>
+		<time>10:32:08</time>
+		<loc>
+			<lat>85.9879</lat>
+			<long>55.676768</long>
+		</loc>
+	</obj>
+	<obj id="2">
+		<url>/images/protoItem.png</url>
+		<date>12/23/17</date>
+		<time>11:22:08</time>
+		<loc>
+			<lat>76.9879</lat>
+			<long>71.676768</long>
+		</loc>
+	</obj>
+	<obj id="3">
+		<url>/images/protoLevel.png</url>
+		<date>9/23/17</date>
+		<time>01:32:08</time>
+		<loc>
+			<lat>72.9879</lat>
+			<long>61.676768</long>
+		</loc>
+	</obj>
+</dronedata>

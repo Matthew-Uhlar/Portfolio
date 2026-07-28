@@ -1,0 +1,230 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+    <!--<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+</head>
+
+<div data-role="main" class="fancymodal-content" id="lineModal" style="margin-top: 10px">
+        <div class="lineTitle">
+            <h5>
+                <button type="button" style="height: 30px" class="btn exp_button" data-toggle="collapse" data-target="#details" >POLE DETAILS</button>
+            </h5>
+        </div>
+            <!--<button type="button" style="float: right" class="btn exp_button" data-toggle="collapse" data-target="#details" >More</button>-->
+        <div id="details" class="collapse" style="font-size: 15px; padding-left: 5px">
+            <div style="font-size:17px; padding-left: 0px">
+                <p>AUTOMATED ANALYSIS</p>
+            </div>
+
+            <div id="DateTime">
+                <h6><b>DATE AND TIME: </b>{{line.poleDetection.timestampSec}}</h6>
+            </div>
+            <div id="Location">
+                <h6><b>GEOLOCATION: </b>{{line.poleDetection.GPSposition[0]}}, {{line.poleDetection.GPSposition[1]}}</h6>
+            </div>
+            <div id="AutoPriority">
+                <h6><b>PRIORITY: </b>{{line.poleDetection.Priority}}</h6>
+            </div>
+
+            <div style="font-size:17px; padding-left: 0px">
+                <p>FIELD OBSERVATIONS</p>
+            </div>
+
+            <div id="Temperature">
+                <h6>
+                    <b>TEMPERATURE: </b>
+                    <label><input type="text" name="tempVal" /></label>
+                </h6>
+            </div>
+            <div id="Weather">
+                <h6>
+                    <b>WEATHER: </b>
+                    <label><input type="text" name="weatherVal" /></label>
+                </h6>
+            </div>
+            <div id="RelativeLocation">
+                <h6>
+                    <b>RELATIVE LOCATION: </b>
+                    <label><input type="text" name="relLocVal" /></label>
+                </h6>
+            </div>
+            <div id="UserAssessment">
+                <h6>
+                    <b>DAMAGE ASSESSMENT: </b>
+                    <label><input type="text" name="assessVal" /></label>
+                </h6>
+            </div>
+            <!--<div id="UserTime">
+                <h6>
+                    <b>TIME OF ASSESSMENT: </b>
+                    <label><input type="text" name="relTimeVal" /></label>
+                </h6>
+            </div>
+            <div id="UserDate">
+                <h6>
+                    <b>DATE OF ASSESSMENT: </b>
+                    <label><input type="text" name="relDateVal" /></label>
+                </h6>
+            </div>-->
+            <button class="md-button" type="button">SUBMIT</button>
+
+        <!--</div>-->
+        <!--<div id="DateTime">-->
+            <!--<h6><b>DATE AND TIME OF IMAGES TAKEN: </b>{{line.poleDetection.timestampSec}}</h6>-->
+        <!--</div>-->
+        <!--<div id="Location">-->
+            <!--<h6><b>LOCATION OF IMAGES TAKEN: </b>{{line.poleDetection.GPSposition[0]}}, {{line.poleDetection.GPSposition[1]}}</h6>-->
+        <!--</div>-->
+        <!--<div id="AutoPriority">-->
+            <!--<h6><b>AUTOMATED ASSESSMENT: </b>{{line.poleDetection.Priority}}</h6>-->
+        <!--</div>-->
+        <!--<div id="Temperature">-->
+            <!--<h6>-->
+                <!--<b>TEMPERATURE: </b>-->
+                <!--<label><input type="text" name="tempVal" /></label>-->
+            <!--</h6>-->
+        <!--</div>-->
+        <!--<div id="Weather">-->
+            <!--<h6>-->
+                <!--<b>WEATHER: </b>-->
+                <!--<label><input type="text" name="weatherVal" /></label>-->
+            <!--</h6>-->
+        <!--</div>-->
+        <!--<div id="RelativeLocation">-->
+            <!--<h6>-->
+                <!--<b>RELATIVE LOCATION: </b>-->
+                <!--<label><input type="text" name="relLocVal" /></label>-->
+            <!--</h6>-->
+        <!--</div>-->
+        <!--<div id="UserAssessment">-->
+            <!--<h6>-->
+                <!--<b>DAMAGE ASSESSMENT: </b>-->
+                <!--<label><input type="text" name="assessVal" /></label>-->
+            <!--</h6>-->
+        <!--</div>-->
+        <!--<div id="UserTime">-->
+            <!--<h6>-->
+                <!--<b>TIME OF ASSESSMENT: </b>-->
+                <!--<label><input type="text" name="relTimeVal" /></label>-->
+            <!--</h6>-->
+        <!--</div>-->
+        <!--<div id="UserDate">-->
+            <!--<h6>-->
+                <!--<b>DATE OF ASSESSMENT: </b>-->
+                <!--<label><input type="text" name="relDateVal" /></label>-->
+            <!--</h6>-->
+        <!--</div>-->
+        <!--<button class="md-button" type="button">SUBMIT</button>-->
+        </div>
+
+
+
+    <div class="lineDetails" style="padding-top: 5px">
+        <!--<div class="lineDescription col-sm-6">-->
+        <!--<h4>Description</h4>-->
+        <!--<p>{{line.details.description}}</p>-->
+        <!--</div>-->
+        <div class="lineTitle" style="padding-top: 10px">
+            <h5>
+                <button type="button" style="height: 30px" class="btn exp_button" data-toggle="collapse" data-target="#images">IMAGES</button>
+            </h5>
+        </div>
+
+        <!--<button type="button" class="btn exp_button" data-toggle="collapse" data-target="#images">More</button>-->
+        <div id="images" class="collapse">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <div class="lineImage ui-content" ng-controller="galleryCtrl">
+            <!--<img src="data/images/{{line.preview}}" alt="">-->
+            <div class="imageSliderContainer">
+                <div ng-repeat="image in images" class="lightBoxContainer" ng-click="openLightboxModal($index)">
+                    <img ng-src="{{image.thumbUrl}}" class="img-thumbnail">
+                </div>
+            </div>
+
+
+        </div>
+        </div>
+
+        <!--<div class="clearfix"></div>-->
+    </div>
+
+
+    <div class="lineDetails" style="padding-top: 5px">
+    <div class="lineTitle" style="padding-top: 10px">
+        <h5>
+            <!--{{line.details.name}} MAPVIEW-->
+            <button type="button" style="height: 30px" class="btn exp_button" data-toggle="collapse" data-target="#map">MAPVIEW</button>
+        </h5>
+    </div>
+    <div id="map" class="collapse">
+        <!--<div id="map"></div>-->
+    </div>
+    </div>
+</div>
+
+
+
+
+        <script>
+            var dom_el = document.querySelector('[ng-controller="overviewCtrl"]');
+            var ng_el = angular.element(dom_el);
+            var ng_el_scope = ng_el.scope();
+
+            //console.log(ng_el_scope.line);
+            //console.log(ng_el_scope.line[1]);
+
+            var latitude = ng_el_scope.line.poleDetection.GPSposition[0];
+            var longitude = ng_el_scope.line.poleDetection.GPSposition[1];
+
+            //console.log(latitude);
+            //console.log(longitude);
+
+            function initMap() {
+                var uluru = {lat: latitude, lng: longitude};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
+
+            var tmpDate = new Date(ng_el_scope.line.poleDetection.timestampSec * 1000);
+            document.getElementById('DateTime').innerHTML =
+                "<h6><b>DATE AND TIME: </b>" + tmpDate.toString() + "</h6 >";
+
+            if (ng_el_scope.line.poleDetection.Priority == 3) {
+                var tmpPri = "(DANGEROUS: IMMEDIATE ATTENTION REQUIRED)";
+                var tmpCol = "red";
+            } else if (ng_el_scope.line.poleDetection.Priority == 2) {
+                var tmpPri = "(DAMAGE LIKELY)";
+                var tmpCol = "yellow";
+            } else if (ng_el_scope.line.poleDetection.Priority == 1) {
+                var tmpPri = "(LOW POSSIBILITY OF DAMAGE)";
+                var tmpCol = "green";
+            } else {
+                var tmpPri = "(NO ISSUE)"
+                var tmpCol = "";
+            };
+
+            //if (tmpCol != "") {
+            //    document.getElementById('AutoPriority').style.color = tmpCol;
+            //}
+
+            document.getElementById('AutoPriority').innerHTML =
+                "<h6><b>PRIORITY: </b><span style = \"color:" + tmpCol + "\">"
+                + ng_el_scope.line.poleDetection.Priority + " " + tmpPri + "</span></h6 >";
+
+        </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU_Aj35e33uw5drn4Fv0r98LsOiaTq6QQ&callback=initMap">
+    </script>
+    <style>
+        #map {
+            height: 200px;
+            width: 100%;
+        }
+    </style>
