@@ -1,0 +1,153 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f5f7fb;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+
+.app-shell { display: grid; grid-template-columns: 250px 1fr; min-height: 100vh; }
+.sidebar {
+  background: #121a2b;
+  color: white;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.sidebar h1 { margin: 12px 0 8px; font-size: 1.45rem; }
+.sidebar-copy { color: #aeb8cc; line-height: 1.5; }
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #7c5cff;
+  color: white;
+  font-weight: 800;
+}
+.brand-mark.large { width: 58px; height: 58px; font-size: 1.2rem; }
+nav { display: grid; gap: 8px; margin: 40px 0; }
+nav a {
+  color: #c8d0df;
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+nav a:hover, nav a.active { background: #24304a; color: white; }
+.profile { display: grid; gap: 6px; }
+.link-button { border: 0; background: transparent; color: #aeb8cc; padding: 0; text-align: left; }
+.main-content { padding: 42px; overflow: hidden; }
+.page-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 28px; }
+.page-header h2 { font-size: 2rem; margin: 6px 0; }
+.page-header p { margin: 0; color: #667085; max-width: 720px; }
+.eyebrow { text-transform: uppercase; letter-spacing: .09em; font-size: .72rem; font-weight: 800; color: #6d4aff; }
+
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.metric-card, .panel {
+  background: white;
+  border: 1px solid #e6e9f0;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(33, 43, 69, .05);
+}
+.metric-card { padding: 22px; display: grid; gap: 8px; }
+.metric-card span, .metric-card small { color: #667085; }
+.metric-card strong { font-size: 2rem; }
+.panel { padding: 24px; }
+.panel h3 { margin-top: 4px; }
+.two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+.date-row { display: flex; gap: 10px; color: #667085; margin-top: 20px; }
+
+.board { display: grid; grid-template-columns: repeat(4, minmax(230px, 1fr)); gap: 16px; overflow-x: auto; }
+.board-column { min-height: 620px; background: #edf0f6; border-radius: 16px; padding: 14px; }
+.column-header { display: flex; justify-content: space-between; align-items: center; padding: 4px 4px 14px; }
+.column-header h3 { margin: 0; }
+.column-header span { background: white; border-radius: 99px; padding: 4px 9px; font-size: .8rem; }
+.work-card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(33, 43, 69, .06); }
+.work-card h4 { margin: 14px 0 8px; }
+.work-card p { color: #667085; line-height: 1.45; font-size: .9rem; }
+.work-card small { color: #98a2b3; }
+.card-topline { display: flex; justify-content: space-between; align-items: center; }
+
+.priority { display: inline-flex; padding: 4px 8px; border-radius: 99px; font-size: .72rem; font-weight: 800; }
+.priority.low { color: #027a48; background: #ecfdf3; }
+.priority.medium { color: #175cd3; background: #eff8ff; }
+.priority.high { color: #b54708; background: #fffaeb; }
+.priority.critical { color: #b42318; background: #fef3f2; }
+
+.backlog-layout { display: grid; grid-template-columns: 360px 1fr; gap: 20px; align-items: start; }
+.list-stack { display: grid; gap: 12px; }
+.backlog-item { display: flex; justify-content: space-between; gap: 24px; }
+.backlog-item h3 { margin: 12px 0 6px; }
+.backlog-item p { margin: 0; color: #667085; }
+
+.form-stack { display: grid; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+label { display: grid; gap: 7px; font-weight: 700; font-size: .9rem; }
+input, textarea, select {
+  width: 100%;
+  border: 1px solid #d6dae4;
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: white;
+  color: #172033;
+}
+textarea { resize: vertical; }
+.primary-button, .secondary-button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 800;
+}
+.primary-button { background: #6d4aff; color: white; }
+.secondary-button { background: #eef0ff; color: #5236c9; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+
+.assistant-grid { display: grid; grid-template-columns: 1.15fr .85fr .85fr; gap: 18px; align-items: start; }
+.assistant-grid .muted { min-height: 48px; }
+.muted { color: #667085; }
+.result-block { margin-top: 20px; border-top: 1px solid #e6e9f0; padding-top: 18px; }
+.result-block li { margin-bottom: 8px; line-height: 1.45; }
+.generated-section { margin-top: 24px; display: grid; gap: 18px; }
+.story-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+
+.login-page { min-height: 100vh; display: grid; grid-template-columns: 1fr 440px; background: #121a2b; }
+.login-intro { padding: 12vw 8vw; color: white; }
+.login-intro h1 { font-size: clamp(3rem, 7vw, 6rem); margin: 24px 0 10px; }
+.login-intro p { font-size: 1.3rem; color: #bdc6d8; }
+.login-card {
+  background: white;
+  margin: 24px;
+  border-radius: 22px;
+  padding: 42px;
+  align-self: center;
+  display: grid;
+  gap: 20px;
+}
+.login-card h2 { margin-bottom: -10px; font-size: 2rem; }
+.error-message { color: #b42318; background: #fef3f2; padding: 10px; border-radius: 8px; }
+
+@media (max-width: 1100px) {
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .assistant-grid { grid-template-columns: 1fr; }
+  .board { grid-template-columns: repeat(4, 280px); }
+}
+@media (max-width: 760px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { height: auto; position: static; }
+  nav { grid-template-columns: repeat(2, 1fr); margin: 20px 0; }
+  .main-content { padding: 24px 16px; }
+  .metric-grid, .two-column, .story-grid, .backlog-layout { grid-template-columns: 1fr; }
+  .login-page { grid-template-columns: 1fr; }
+  .login-intro { padding: 50px 24px 10px; }
+  .login-intro h1 { font-size: 3rem; }
+  .login-card { margin: 24px; }
+}

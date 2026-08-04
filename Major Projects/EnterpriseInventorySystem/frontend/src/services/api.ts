@@ -1,0 +1,3 @@
+const base=import.meta.env.VITE_API_URL||'http://localhost:8080/api';
+export const auth={get token(){return localStorage.getItem('token')},get role(){return localStorage.getItem('role')},logout(){localStorage.clear()}};
+export async function api<T>(path:string,options:RequestInit={}):Promise<T>{const res=await fetch(base+path,{...options,headers:{'Content-Type':'application/json',...(auth.token?{Authorization:`Bearer ${auth.token}`}:{}) ,...options.headers}});if(res.status===401){auth.logout();location.href='/login';throw new Error('Unauthorized')}if(!res.ok){const body=await res.json().catch(()=>({}));throw new Error(body.message||'Request failed')}return res.status===204?undefined as T:res.json();}

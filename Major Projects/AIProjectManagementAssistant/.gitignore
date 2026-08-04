@@ -1,0 +1,20 @@
+# Build output
+bin/
+obj/
+dist/
+node_modules/
+
+# Local settings
+.env
+.env.local
+appsettings.Development.json
+
+# Editor files
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Operating system files
+.DS_Store
+Thumbs.db
