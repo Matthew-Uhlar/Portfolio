@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:supportflow;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+app:
+  jwt:
+    secret: TestSecretThatIsLongEnoughForHmacSigning123456789
+    expiration-minutes: 60
