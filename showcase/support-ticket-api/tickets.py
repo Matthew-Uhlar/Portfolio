@@ -1,6 +1,7 @@
 """SQLite ticket storage, with validation shared by the CLI and HTTP API."""
 
 import sqlite3
+from contextlib import contextmanager
 from datetime import datetime, timezone
 
 
@@ -61,11 +62,16 @@ class Store:
                     COMMIT;
                 """)
 
+    @contextmanager
     def connect(self):
         db = sqlite3.connect(self.path, timeout=5)
         db.row_factory = sqlite3.Row
         db.execute("PRAGMA foreign_keys=ON")
-        return db
+        try:
+            with db:
+                yield db
+        finally:
+            db.close()
 
     @staticmethod
     def now():
