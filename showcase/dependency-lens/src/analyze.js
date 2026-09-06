@@ -4,16 +4,69 @@ import path from 'node:path';
 const extensions = ['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx', '.mts', '.cts'];
 const ignored = new Set(['node_modules', '.git', 'coverage', 'dist', 'build']);
 
-// Keep strings intact while removing comments so commented imports stay out.
-function withoutComments(source) {
-  return source.replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)|\/\*[\s\S]*?\*\/|\/\/[^\n]*/g,
-    (match, string) => string ?? ' '.repeat(match.length));
+// This lexer keeps quoted text separate from code instead of searching raw text.
+function tokens(source) {
+  const result = [];
+  let i = 0;
+  while (i < source.length) {
+    const c = source[i];
+    if (/\s/.test(c)) { i++; continue; }
+    if (source.startsWith('//', i)) { while (i < source.length && source[i] !== '\n') i++; continue; }
+    if (source.startsWith('/*', i)) { const end = source.indexOf('*/', i + 2); i = end < 0 ? source.length : end + 2; continue; }
+    if (c === '"' || c === "'" || c === '`') {
+      const quote = c;
+      let value = '', escaped = false;
+      i++;
+      while (i < source.length && source[i] !== quote) {
+        if (source[i] === '\\') { escaped = true; value += source.slice(i, i + 2); i += 2; }
+        else value += source[i++];
+      }
+      i++;
+      result.push({ kind: quote === '`' || escaped ? 'opaque' : 'string', value });
+      continue;
+    }
+    const previous = result.at(-1)?.value;
+    // Slash is ambiguous without a parser. These positions normally start a regex.
+    if (c === '/' && (previous === undefined || ['=', '(', '[', '{', ',', ':', ';', '!', '?', 'return', '=>'].includes(previous))) {
+      i++;
+      let characterClass = false;
+      while (i < source.length) {
+        if (source[i] === '\\') { i += 2; continue; }
+        if (source[i] === '[') characterClass = true;
+        if (source[i] === ']') characterClass = false;
+        if (source[i++] === '/' && !characterClass) break;
+      }
+      while (/[a-z]/i.test(source[i] ?? '') && i < source.length) i++;
+      result.push({ kind: 'opaque', value: '<regex>' });
+      continue;
+    }
+    const word = /^[A-Za-z_$][\w$]*/.exec(source.slice(i));
+    if (word) { result.push({ kind: 'word', value: word[0] }); i += word[0].length; }
+    else { result.push({ kind: 'punctuation', value: c }); i++; }
+  }
+  return result;
 }
 
 export function imports(source) {
-  const cleaned = withoutComments(source);
-  const pattern = /\b(?:import\s+(?:type\s+)?(?:[^;'"()]*?\s+from\s*)?|export\s+(?:type\s+)?[^;'"()]*?\s+from\s*|require\s*\(\s*|import\s*\(\s*)['"]([^'"\n]+)['"]/g;
-  return [...new Set([...cleaned.matchAll(pattern)].map(match => match[1]))].sort();
+  const list = tokens(source), found = new Set();
+  const add = token => { if (token?.kind === 'string') found.add(token.value); };
+  for (let i = 0; i < list.length; i++) {
+    const token = list[i];
+    if (token.kind !== 'word' || !['import', 'export', 'require'].includes(token.value) || list[i - 1]?.value === '.') continue;
+    const next = list[i + 1];
+    if (next?.value === '(' && token.value !== 'export') {
+      if (list[i + 3]?.value === ')' || (token.value === 'import' && list[i + 3]?.value === ',')) add(list[i + 2]);
+      continue;
+    }
+    if (token.value === 'require') continue;
+    if (token.value === 'import' && next?.kind === 'string') { add(next); continue; }
+    if (token.value === 'export' && !['{', '*', 'type'].includes(next?.value)) continue;
+    for (let j = i + 1; j < list.length; j++) {
+      if ([';', '=', '(', 'import', 'export'].includes(list[j].value) || list[j].kind === 'opaque') break;
+      if (list[j].value === 'from') { add(list[j + 1]); break; }
+    }
+  }
+  return [...found].sort();
 }
 
 async function collect(root) {

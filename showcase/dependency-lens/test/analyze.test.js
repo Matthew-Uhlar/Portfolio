@@ -10,7 +10,13 @@ import { analyze, imports, findCycles, format } from '../src/analyze.js';
 const project = fileURLToPath(new URL('../', import.meta.url));
 async function fixture(t, files) {
   const root = await mkdtemp(path.join(os.tmpdir(), 'dependency-lens-'));
-  t.after(() => rm(root, { recursive: true, force: true }));
+  t.after(() => {
+    const resolved = path.resolve(root);
+    if (path.dirname(resolved) !== path.resolve(os.tmpdir()) || !path.basename(resolved).startsWith('dependency-lens-')) {
+      throw new Error('Refusing to remove a directory outside the owned fixture location');
+    }
+    return rm(resolved, { recursive: true, force: true });
+  });
   for (const [name, source] of Object.entries(files)) {
     await mkdir(path.dirname(path.join(root, name)), { recursive: true });
     await writeFile(path.join(root, name), source);
@@ -37,6 +43,22 @@ test('resolves TypeScript replacements and indexes, separates external imports, 
   assert.deepEqual(result.summary, { files: 3, edges: 2, cycles: 0, unresolved: 1, externalImports: 1 });
   assert.deepEqual(result.unresolved, [{ file: 'main.ts', specifier: './missing' }]);
   assert.deepEqual(result.edges, [{ from: 'main.ts', to: 'lib/index.js' }, { from: 'main.ts', to: 'types.ts' }]);
+});
+
+test('separates import syntax from strings, templates, regexes, and object methods', () => {
+  const source = [
+    `const message = "import './fake-string'";`,
+    "const template = `require('./fake-template')`;",
+    `const pattern = /import ['"]fake-regex['"]/;`,
+    `object.require('./fake-method');`,
+    `// import './fake-comment'`,
+    `/* export { x } from './fake-block' */`,
+    `import {`, `  thing,`, `  other`, `} from './real-static';`,
+    `const lazy = import(/* load later */ './real-dynamic');`,
+    `const computed = import('./prefix' + variable);`,
+    `export { thing } from './real-export';`
+  ].join('\n');
+  assert.deepEqual(imports(source), ['./real-dynamic', './real-export', './real-static']);
 });
 
 test('entry limits findings to reachable files', async t => {
