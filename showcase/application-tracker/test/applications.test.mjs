@@ -27,3 +27,11 @@ test('filters across notes, status, and sorts without mutating input', () => {
   assert.equal(filterApplications(applications, 'remote', 'Applied').length, 0);
 });
 test('summary includes zero counts', () => assert.deepEqual(summarize([row()]), { Saved: 0, Applied: 1, Interview: 0, Offer: 0, Closed: 0 }));
+test('dates reject calendar rollover and accept canonical UTC timestamps', () => {
+  for (const updatedAt of ['2026-02-30T00:00:00.000Z', '2026-01-01T24:00:00Z', '2026-01-01T00:00:00+02:00', '2026-01-01T00:00:00.1Z']) {
+    assert.throws(() => validateApplication(row({ updatedAt })));
+  }
+  for (const updatedAt of ['2024-02-29T12:30:01Z', '2026-01-01T00:00:00.123Z']) {
+    assert.equal(validateApplication(row({ updatedAt })).updatedAt, updatedAt);
+  }
+});

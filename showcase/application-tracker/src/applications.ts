@@ -27,7 +27,11 @@ export function validateApplication(value: unknown): Application {
   }
   const notes = text(row.notes, 'Notes', 5000);
   const updatedAt = text(row.updatedAt, 'Updated date', 40, true);
-  if (!/^\d{4}-\d{2}-\d{2}T/.test(updatedAt) || !Number.isFinite(Date.parse(updatedAt))) throw new Error('Updated date must be an ISO timestamp.');
+  const timestamp = Date.parse(updatedAt);
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(updatedAt) ||
+      !Number.isFinite(timestamp) || new Date(timestamp).toISOString() !== updatedAt.replace(/(?<=:\d{2})Z$/, '.000Z')) {
+    throw new Error('Updated date must be a valid UTC ISO timestamp.');
+  }
   return { id, company, role, status: row.status as Status, url, notes, updatedAt };
 }
 

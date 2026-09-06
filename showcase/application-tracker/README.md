@@ -25,15 +25,19 @@ Open http://127.0.0.1:3000. No package installation is needed. If you're running
 
 ## How it's built
 
-`src/applications.ts` holds the typed domain model, runtime validation, filtering, and counts. `server.mjs` uses Node's built-in TypeScript stripping to serve that same module to the browser as JavaScript. This avoids maintaining two versions of the validation rules. Type stripping is not type checking; runtime tests validate behavior, and a future build setup could add a TypeScript compiler check.
+`src/applications.ts` holds the typed domain model, runtime validation, filtering, and counts. `server.mjs` uses Node's built-in TypeScript stripping to serve that same module to the browser as JavaScript. This avoids maintaining two versions of the validation rules. Type stripping is not type checking; a separate strict TypeScript check validates the domain module during development. There are no runtime dependencies.
 
 The frontend uses browser APIs, semantic HTML, labeled controls, a native modal dialog, and text nodes for user content. Posting links only accept HTTP or HTTPS. The local server serves four explicitly listed paths, binds to loopback, and sets a restrictive content security policy.
 
 ## Checks
 
 ```sh
+npm ci
+npm run check
 npm test
 ```
+
+TypeScript is a development dependency; install it with `npm ci` before running the type check. Starting the app and running runtime tests still work without installing packages.
 
 Tests cover field validation, unsafe URLs, duplicate IDs, malformed backups, the import size limit, search, ordering, counts, asset delivery, browser-ready domain code, and blocked server paths. The portfolio's root workflow runs these tests.
 

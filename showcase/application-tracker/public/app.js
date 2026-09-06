@@ -77,7 +77,7 @@ $('#file').addEventListener('change', async event => {
 });
 window.addEventListener('storage', event => {
   if (event.key !== key && event.key !== null) return;
-  try { applications = event.newValue ? parseBackup(event.newValue) : []; render(); announce('Applications updated from another tab.'); }
+  try { applications = event.newValue ? parseBackup(event.newValue) : []; storageHealthy = true; render(); announce('Applications updated from another tab.'); }
   catch { storageHealthy = false; announce('Another tab saved invalid data. Reload after restoring storage.'); }
 });
 render();
