@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Application Tracker</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<header><div class="brand"><span class="mark" aria-hidden="true">a.</span><span>APPLICATION TRACKER</span></div><div class="local">● Stored on this device</div></header>
+<main>
+<section class="intro"><div><p class="eyebrow">YOUR NEXT CHAPTER</p><h1>A little structure.<br>A clearer job search.</h1><p class="subtitle">Keep opportunities, notes, and next steps together.</p></div><button id="new" class="primary">+ Add application</button></section>
+<section id="stats" class="stats" aria-label="Application totals"></section>
+<section class="workspace" aria-label="Applications">
+<div class="toolbar"><div><label for="search">Search applications</label><input id="search" type="search" placeholder="Company, role, or notes"></div><div><label for="filter">Status</label><select id="filter"><option>All</option></select></div><div class="backup"><button id="export">Export backup</button><button id="import">Import backup</button><input id="file" type="file" accept="application/json,.json" hidden></div></div>
+<p id="message" role="status" aria-live="polite"></p><div class="list-heading"><h2>Opportunities</h2><span id="count"></span></div><div id="list"></div>
+</section><footer>Your data stays in this browser. Export a backup before switching devices or clearing browser data.</footer>
+</main>
+<dialog id="editor"><form id="form"><div class="dialog-heading"><h2 id="editor-title">Add application</h2><button type="button" id="close" aria-label="Close editor">✕</button></div><input name="id" type="hidden"><label for="company">Company</label><input id="company" name="company" required maxlength="120"><label for="role">Role</label><input id="role" name="role" required maxlength="160"><label for="status">Status</label><select id="status" name="status"></select><label for="url">Job posting URL <span>(optional)</span></label><input id="url" name="url" type="url" maxlength="2000" placeholder="https://"><label for="notes">Notes & next steps <span>(optional)</span></label><textarea id="notes" name="notes" rows="4" maxlength="5000" placeholder="Interview dates, people to follow up with, questions to ask…"></textarea><p id="form-error" role="alert"></p><div class="dialog-actions"><button id="delete" type="button" class="danger">Delete</button><button type="submit" class="primary">Save application</button></div></form></dialog>
+</body></html>
