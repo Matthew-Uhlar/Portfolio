@@ -3,6 +3,7 @@ import json
 import tempfile
 import threading
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from server import make_server
@@ -61,6 +62,23 @@ class StoreTests(unittest.TestCase):
             with self.subTest(options=options), self.assertRaises(ValidationError):
                 self.store.list(**options)
 
+    def test_competing_transitions_validate_the_latest_status(self):
+        ticket = self.create()
+        barrier = threading.Barrier(2)
+
+        def transition(status):
+            barrier.wait(timeout=3)
+            try:
+                return self.store.update(ticket["id"], {"status": status})["status"]
+            except ConflictError:
+                return "conflict"
+
+        with ThreadPoolExecutor(max_workers=2) as workers:
+            results = list(workers.map(transition, ("closed", "in_progress")))
+        self.assertEqual(results.count("conflict"), 1)
+        winner = next(result for result in results if result != "conflict")
+        self.assertEqual(self.store.get(ticket["id"])["status"], winner)
+
 
 class HttpTests(unittest.TestCase):
     def setUp(self):
@@ -107,6 +125,39 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(self.request("PUT", "/tickets")[0], 405)
         self.assertEqual(self.request("GET", "/unknown")[0], 404)
         self.assertEqual(self.request("GET", "/health"), (200, {"status": "ok"}))
+
+    def test_rejected_headers_and_excess_query_fields(self):
+        for headers in (
+            [("Content-Type", "text/plain"), ("Content-Length", "2")],
+            [("Content-Type", "application/json"), ("Content-Length", "2"), ("Transfer-Encoding", "chunked")],
+            [("Content-Type", "application/json"), ("Content-Length", "2"), ("Content-Length", "2")],
+        ):
+            with self.subTest(headers=headers):
+                connection = http.client.HTTPConnection("127.0.0.1", self.server.server_port, timeout=3)
+                try:
+                    connection.putrequest("POST", "/tickets")
+                    for name, value in headers:
+                        connection.putheader(name, value)
+                    connection.endheaders(b"{}")
+                    response = connection.getresponse()
+                    self.assertEqual(response.status, 400)
+                    self.assertIn("error", json.loads(response.read()))
+                finally:
+                    connection.close()
+        self.assertEqual(self.request("GET", "/tickets?" + "&".join(f"x{i}=1" for i in range(11)))[0], 400)
+
+    def test_method_errors_advertise_allowed_methods(self):
+        for path, allow in (("/tickets", "GET, POST"), ("/tickets/1", "GET, PATCH, DELETE"), ("/tickets/1/comments", "POST"), ("/health", "GET"), ("/reports", "GET")):
+            with self.subTest(path=path):
+                connection = http.client.HTTPConnection("127.0.0.1", self.server.server_port, timeout=3)
+                try:
+                    connection.request("PUT", path)
+                    response = connection.getresponse()
+                    self.assertEqual(response.status, 405)
+                    self.assertEqual(response.getheader("Allow"), allow)
+                    response.read()
+                finally:
+                    connection.close()
 
 
 if __name__ == "__main__":

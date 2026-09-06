@@ -16,16 +16,20 @@ def make_server(store, port=8000):
             super().setup()
             self.connection.settimeout(10)
 
-        def reply(self, status, data=None):
+        def reply(self, status, data=None, allow=None):
             body = json.dumps(data).encode() if data is not None else b""
             self.send_response(status)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Content-Length", str(len(body)))
             self.send_header("X-Content-Type-Options", "nosniff")
+            if allow:
+                self.send_header("Allow", allow)
             self.end_headers()
             self.wfile.write(body)
 
         def read_body(self):
+            if len(self.headers.get_all("Content-Length", [])) != 1:
+                raise ValidationError("Exactly one Content-Length header is required")
             if self.headers.get("Transfer-Encoding"):
                 raise ValidationError("Transfer-Encoding is not supported")
             if self.headers.get_content_type() != "application/json":
@@ -77,7 +81,13 @@ def make_server(store, port=8000):
                         return self.reply(204)
                 elif url.path not in {"/health", "/reports"}:
                     return self.reply(404, {"error": "Route not found"})
-                self.reply(405, {"error": "Method not allowed"})
+                if url.path == "/tickets":
+                    allow = "GET, POST"
+                elif match:
+                    allow = "POST" if match[2] else "GET, PATCH, DELETE"
+                else:
+                    allow = "GET"
+                self.reply(405, {"error": "Method not allowed"}, allow=allow)
             except NotFoundError as exc:
                 self.reply(404, {"error": str(exc)})
             except ConflictError as exc:

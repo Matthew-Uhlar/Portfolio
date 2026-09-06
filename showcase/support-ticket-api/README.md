@@ -4,9 +4,10 @@ A small Python API for tracking support requests, with SQLite storage and no thi
 
 ## Run it
 
-Requires Python 3.11 or newer. From this directory:
+Requires Python 3.11 or newer. From the portfolio repository root:
 
 ```sh
+cd showcase/support-ticket-api
 python server.py --db tickets.db --seed
 python server.py --db tickets.db --port 8000
 ```
