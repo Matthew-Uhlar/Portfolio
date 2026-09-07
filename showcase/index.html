@@ -1,43 +1,156 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Matthew Uhlar's software portfolio: applications, APIs, and developer tools with readable code and repeatable tests.">
-  <title>Matthew Uhlar — Software portfolio</title>
-  <link rel="stylesheet" href="portfolio.css">
-</head>
-<body>
-  <a class="skip" href="#projects">Skip to projects</a>
-  <header class="wrap top"><a class="wordmark" href="https://github.com/Matthew-Uhlar">MU<span> / Matthew Uhlar</span></a><a href="https://github.com/Matthew-Uhlar/Portfolio">View repository <span aria-hidden="true">↗</span></a></header>
-  <main class="wrap">
-    <section class="intro" aria-labelledby="intro-title">
-      <p class="eyebrow">SOFTWARE PORTFOLIO / SELECTED WORK</p>
-      <h1 id="intro-title">Useful software.<br><span>Carefully built.</span></h1>
-      <p class="lead">I’m working on the details that make software dependable: clear interfaces, predictable data, and tests that check what actually matters.</p>
-      <a class="button" href="#projects">Explore the projects <span aria-hidden="true">↓</span></a>
-      <div class="principles"><span>Readable code</span><span>Repeatable tests</span><span>Documented decisions</span></div>
-    </section>
-    <section id="projects" aria-labelledby="project-title">
-      <div class="section-heading"><h2 id="project-title">Three problems. Three approaches.</h2><span>01 — 03</span></div>
-      <article class="project">
-        <div class="number">01 / WEB APPLICATION</div>
-        <div><h3>Application Tracker</h3><p>A focused place to keep track of job applications, next steps, and progress. Data stays in the browser, with import and export for moving it between devices.</p><ul class="tags" aria-label="Technologies"><li>TypeScript</li><li>JavaScript</li><li>HTML / CSS</li></ul><a class="project-link" href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/application-tracker">Read the code &amp; setup guide <span aria-hidden="true">↗</span></a></div>
-        <div class="detail"><h4>Engineering focus</h4><p>Input validation<br>Accessible interactions<br>Local persistence</p></div>
-      </article>
-      <article class="project">
-        <div class="number">02 / BACKEND SERVICE</div>
-        <div><h3>Support Ticket API</h3><p>A small ticket service with a relational database, comments, and explicit status transitions. Built to make request handling and data rules easy to inspect.</p><ul class="tags" aria-label="Technologies"><li>Python</li><li>SQLite</li><li>HTTP / JSON</li></ul><a class="project-link" href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/support-ticket-api">Read the code &amp; setup guide <span aria-hidden="true">↗</span></a></div>
-        <div class="detail"><h4>Engineering focus</h4><p>Relational data<br>API error handling<br>Integration tests</p></div>
-      </article>
-      <article class="project">
-        <div class="number">03 / DEVELOPER TOOL</div>
-        <div><h3>Dependency Lens</h3><p>A command-line tool for seeing how source files fit together. Find circular dependencies and unresolved local imports without executing the code being scanned.</p><ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>Node.js</li><li>Graph algorithms</li></ul><a class="project-link" href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/dependency-lens">Read the code &amp; setup guide <span aria-hidden="true">↗</span></a></div>
-        <div class="detail"><h4>Engineering focus</h4><p>Import resolution<br>Cycle detection<br>CLI usability</p></div>
-      </article>
-    </section>
-    <section class="about" aria-labelledby="about-title"><p class="eyebrow">HOW I APPROACH A PROJECT</p><h2 id="about-title">Make it work.<br>Then make it understandable.</h2><div><p>I like projects with a concrete problem and a clear way to check the result. These examples include setup instructions, sample data, tests, and notes about what I would improve next.</p><p>They’re portfolio projects built with AI assistance, not production or client work. The code and tradeoffs are open for review.</p><a href="https://github.com/Matthew-Uhlar">Find me on GitHub <span aria-hidden="true">↗</span></a></div></section>
-  </main>
-  <footer class="wrap"><span>Matthew Uhlar · Software portfolio</span><span>Built with HTML &amp; CSS. No build step.</span></footer>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Matthew Uhlar's software portfolio: applications, APIs, and developer tools with readable code and repeatable tests."
+    />
+    <title>Matthew Uhlar — Software portfolio</title>
+    <link rel="stylesheet" href="portfolio.css?v=2" />
+  </head>
+  <body>
+    <a class="skip" href="#projects">Skip to projects</a>
+    <header class="wrap top">
+      <a class="wordmark" href="https://github.com/Matthew-Uhlar"
+        >MU<span> / Matthew Uhlar</span></a
+      ><a href="https://github.com/Matthew-Uhlar/Portfolio"
+        >View repository <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main class="wrap">
+      <section class="intro" aria-labelledby="intro-title">
+        <p class="eyebrow">SOFTWARE PORTFOLIO / SELECTED WORK</p>
+        <h1 id="intro-title">
+          Useful software.<br /><span>Carefully built.</span>
+        </h1>
+        <p class="lead">
+          I’m working on the details that make software dependable: clear
+          interfaces, predictable data, and tests that check what actually
+          matters.
+        </p>
+        <a class="button" href="#projects"
+          >Explore the projects <span aria-hidden="true">↓</span></a
+        >
+        <div class="principles">
+          <span>Readable code</span><span>Repeatable tests</span
+          ><span>Documented decisions</span>
+        </div>
+      </section>
+      <section id="projects" aria-labelledby="project-title">
+        <div class="section-heading">
+          <h2 id="project-title">Three problems. Three approaches.</h2>
+          <span>01 — 03</span>
+        </div>
+        <article class="project">
+          <div class="number">01 / WEB APPLICATION</div>
+          <div>
+            <h3>Application Tracker</h3>
+            <p>
+              A focused place to keep track of job applications, next steps, and
+              progress. Data stays in the browser, with import and export for
+              moving it between devices.
+            </p>
+            <ul class="tags" aria-label="Technologies">
+              <li>TypeScript</li>
+              <li>JavaScript</li>
+              <li>HTML / CSS</li>
+            </ul>
+            <a
+              class="project-link"
+              href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/application-tracker"
+              >Read the code &amp; setup guide
+              <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="detail">
+            <h4>Engineering focus</h4>
+            <p>
+              Input validation<br />Accessible interactions<br />Local
+              persistence
+            </p>
+          </div>
+        </article>
+        <article class="project">
+          <div class="number">02 / BACKEND SERVICE</div>
+          <div>
+            <h3>Support Ticket API</h3>
+            <p>
+              A small ticket service with a relational database, comments, and
+              explicit status transitions. Built to make request handling and
+              data rules easy to inspect.
+            </p>
+            <ul class="tags" aria-label="Technologies">
+              <li>Python</li>
+              <li>SQLite</li>
+              <li>HTTP / JSON</li>
+            </ul>
+            <a
+              class="project-link"
+              href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/support-ticket-api"
+              >Read the code &amp; setup guide
+              <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="detail">
+            <h4>Engineering focus</h4>
+            <p>
+              Relational data<br />API error handling<br />Integration tests
+            </p>
+          </div>
+        </article>
+        <article class="project">
+          <div class="number">03 / DEVELOPER TOOL</div>
+          <div>
+            <h3>Dependency Lens</h3>
+            <p>
+              A command-line tool for seeing how source files fit together. Find
+              circular dependencies and unresolved local imports without
+              executing the code being scanned.
+            </p>
+            <ul class="tags" aria-label="Technologies">
+              <li>JavaScript</li>
+              <li>Node.js</li>
+              <li>Graph algorithms</li>
+            </ul>
+            <a
+              class="project-link"
+              href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/dependency-lens"
+              >Read the code &amp; setup guide
+              <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="detail">
+            <h4>Engineering focus</h4>
+            <p>Import resolution<br />Cycle detection<br />CLI usability</p>
+          </div>
+        </article>
+      </section>
+      <section class="about" aria-labelledby="about-title">
+        <p class="eyebrow">HOW I APPROACH A PROJECT</p>
+        <h2 id="about-title">
+          Make it work.<br />Then make it understandable.
+        </h2>
+        <div>
+          <p>
+            I like projects with a concrete problem and a clear way to check the
+            result. These examples include setup instructions, sample data,
+            tests, and notes about what I would improve next.
+          </p>
+          <p>
+            They’re portfolio projects built with AI assistance, not production
+            or client work. The code and tradeoffs are open for review.
+          </p>
+          <a href="https://github.com/Matthew-Uhlar"
+            >Find me on GitHub <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="wrap">
+      <span>Matthew Uhlar · Software portfolio</span
+      ><span>Built with HTML &amp; CSS. No build step.</span>
+    </footer>
+  </body>
 </html>
