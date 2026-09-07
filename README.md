@@ -1,4 +1,4 @@
-# Matthew Uhlar · Software portfolio
+# Software portfolio
 
 I’m building small, useful applications with clear code, repeatable tests, and enough documentation to make them easy to run. This collection covers browser interfaces, API design, relational data, and developer tools.
 
