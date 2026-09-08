@@ -1,5 +1,7 @@
 # Software portfolio
 
+**[View my portfolio website](https://matthew-uhlar.github.io/Portfolio/)**
+
 I’m building small, useful applications with clear code, repeatable tests, and enough documentation to make them easy to run. This collection covers browser interfaces, API design, relational data, and developer tools.
 
 ## Start here
@@ -12,7 +14,7 @@ I’m building small, useful applications with clear code, repeatable tests, and
 
 Each project has its own setup instructions, examples, tests, and a short explanation of the tradeoffs I made. The commits separate the initial implementation, tests, and later improvements so the development process is easy to follow.
 
-For a visual overview, open [the portfolio page](showcase/index.html) after cloning this repository. It is a static page with no build step.
+For a visual overview, visit [the live portfolio](https://matthew-uhlar.github.io/Portfolio/). GitHub Pages hosts it for free and updates it when the website files change on `main`. You can also open [the portfolio page](showcase/index.html) locally after cloning this repository.
 
 ## Run the collection
 
