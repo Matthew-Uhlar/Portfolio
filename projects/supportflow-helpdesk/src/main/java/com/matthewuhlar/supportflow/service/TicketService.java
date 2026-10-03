@@ -144,5 +144,8 @@ public class TicketService {
         history.setChangedBy(user);
         history.setChangeDescription(description);
         historyRepository.save(history);
+        if (ticket != null) {
+            ticket.getHistory().add(0, history);
+        }
     }
 }
