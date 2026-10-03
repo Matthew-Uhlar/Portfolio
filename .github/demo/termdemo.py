@@ -23,7 +23,7 @@ function color(s){return esc(s).replace(/^(\\s*)(ADDED.*|Added:.*)$/gm,'$1<span 
 (async()=>{await sleep(1200);
 for(const s of steps){ if(s.note){cap.textContent=s.note;}
  if(s.cmd!==null){const line=document.createElement('div');line.innerHTML='<span class=p>matt@dev</span>:<span style="color:#58a6ff">'+(s.cwd||'~/project')+'</span>$ <span class=c></span>';term.appendChild(line);
- const c=line.querySelector('.c');for(const ch of s.cmd){c.textContent+=ch;await sleep(38);}
+ const c=line.querySelector('.c');const d=Math.max(8,Math.min(38,2200/s.cmd.length));for(const ch of s.cmd){c.textContent+=ch;await sleep(d);}
  await sleep(500);}const o=document.createElement('div');o.className='o';term.appendChild(o);
  const lines=s.out.replace(/\\s+$/,'').split('\\n');for(const l of lines){o.innerHTML+=color(l)+'\\n';term.scrollTop=term.scrollHeight;await sleep(s.fast?25:70);}
  term.scrollTop=term.scrollHeight;await sleep(s.pause||2600);
