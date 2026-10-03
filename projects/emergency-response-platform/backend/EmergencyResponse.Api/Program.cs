@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using EmergencyResponse.Api.Data;
 using EmergencyResponse.Api.Hubs;
 using EmergencyResponse.Api.Services;
@@ -9,8 +10,17 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddSignalR();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    // Entities reference each other, so skip cycles, and send enums as names the frontend expects.
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+builder.Services.AddSignalR().AddJsonProtocol(options =>
+{
+    options.PayloadSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
