@@ -1,5 +1,9 @@
 # Application Tracker
 
+[![Application Tracker demo](https://raw.githubusercontent.com/Matthew-Uhlar/Portfolio/main/demos/application-tracker-demo.gif)](https://matthew-uhlar.github.io/Portfolio/demos/application-tracker-demo.mp4)
+
+**[Watch the full demo video (MP4)](https://matthew-uhlar.github.io/Portfolio/demos/application-tracker-demo.mp4)** | Adding applications, status totals, search, filtering and editing an application as it moves through the pipeline.
+
 A small browser app for keeping a job search organized: save roles, move them through a pipeline, and keep follow-up notes in one place.
 
 I wanted the core workflow to feel straightforward. The app starts empty, keeps data in the browser, and uses JSON backups so moving data doesn't depend on an account or a service staying online.

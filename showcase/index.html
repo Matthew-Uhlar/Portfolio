@@ -3,154 +3,92 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Matthew Uhlar's software portfolio: applications, APIs, and developer tools with readable code and repeatable tests."
-    />
-    <title>Matthew Uhlar — Software portfolio</title>
-    <link rel="stylesheet" href="portfolio.css?v=2" />
+    <meta name="description" content="Matthew Uhlar, software developer in Austin, TX. Full stack .NET, Java and React projects with recorded demos." />
+    <title>Matthew Uhlar | Software Developer</title>
+    <link rel="stylesheet" href="portfolio.css?v=3" />
   </head>
   <body>
     <a class="skip" href="#projects">Skip to projects</a>
     <header class="wrap top">
-      <a class="wordmark" href="https://github.com/Matthew-Uhlar"
-        >MU<span> / Matthew Uhlar</span></a
-      ><a href="https://github.com/Matthew-Uhlar/Portfolio"
-        >View repository <span aria-hidden="true">↗</span></a
-      >
+      <a class="wordmark" href="https://github.com/Matthew-Uhlar">MU<span> / Matthew Uhlar</span></a>
+      <nav><a href="#projects">Projects</a><a href="https://github.com/Matthew-Uhlar">GitHub</a><a href="https://www.linkedin.com/in/matthew-uhlar-ssm-92623617a">LinkedIn</a><a href="mailto:mattuhlar@gmail.com">Email</a></nav>
     </header>
     <main class="wrap">
-      <section class="intro" aria-labelledby="intro-title">
-        <p class="eyebrow">SOFTWARE PORTFOLIO / SELECTED WORK</p>
-        <h1 id="intro-title">
-          Useful software.<br /><span>Carefully built.</span>
-        </h1>
-        <p class="lead">
-          I’m working on the details that make software dependable: clear
-          interfaces, predictable data, and tests that check what actually
-          matters.
-        </p>
-        <a class="button" href="#projects"
-          >Explore the projects <span aria-hidden="true">↓</span></a
-        >
-        <div class="principles">
-          <span>Readable code</span><span>Repeatable tests</span
-          ><span>Documented decisions</span>
+      <section class="intro">
+        <p class="eyebrow">SOFTWARE DEVELOPER / AUSTIN, TX / OPEN TO REMOTE</p>
+        <h1>Full stack apps that<br /><span>solve real business problems.</span></h1>
+        <p class="lead">I build with C# and ASP.NET Core, Java and Spring Boot and React with TypeScript on PostgreSQL. BS in Computer Science, MS in AI and Machine Learning in progress and a Certified SAFe Scrum Master with years of running IT and operations for growing organizations.</p>
+        <p class="cta"><a class="button" href="#projects">See the demos</a><a class="button ghost" href="mailto:mattuhlar@gmail.com">Get in touch</a></p>
+      </section>
+      <section id="projects">
+        <div class="section-heading"><h2>Featured projects</h2><span>Every project has a recorded demo</span></div>
+        <div class="grid">
+      <article class="card">
+        <a class="thumb" href="demos/ai-project-management-assistant-demo.mp4" aria-label="Watch the Project Pilot demo video"><img src="demos/ai-project-management-assistant-demo.gif" alt="Animated preview of Project Pilot" loading="lazy" /><span class="play">Watch demo</span></a>
+        <div class="body"><p class="kicker">AI project management assistant</p><h3>Project Pilot</h3><p>Agile planning tool with JWT roles, sprints, a drag and drop Kanban board and an assistant that drafts user stories, suggests points, flags risks and summarizes sprints. The AI layer sits behind an interface so a hosted LLM can be swapped in.</p><ul class="tags"><li>C#</li><li>ASP.NET Core 8</li><li>EF Core</li><li>React</li><li>TypeScript</li><li>PostgreSQL</li><li>Docker</li></ul>
+          <p class="links"><a href="demos/ai-project-management-assistant-demo.mp4">Demo video</a><a href="https://github.com/Matthew-Uhlar/ai-project-management-assistant">Source code</a></p></div>
+      </article>
+      <article class="card">
+        <a class="thumb" href="demos/supportflow-helpdesk-demo.mp4" aria-label="Watch the SupportFlow demo video"><img src="demos/supportflow-helpdesk-demo.gif" alt="Animated preview of SupportFlow" loading="lazy" /><span class="play">Watch demo</span></a>
+        <div class="body"><p class="kicker">Help desk API</p><h3>SupportFlow</h3><p>Ticketing service with employee, technician and admin roles, enforced status workflows, comments, an audit trail of every change and reporting. Secured with Spring Security and JWT, documented with OpenAPI.</p><ul class="tags"><li>Java 21</li><li>Spring Boot 3</li><li>Spring Security</li><li>JPA</li><li>PostgreSQL</li><li>JUnit 5</li></ul>
+          <p class="links"><a href="demos/supportflow-helpdesk-demo.mp4">Demo video</a><a href="https://github.com/Matthew-Uhlar/supportflow-helpdesk">Source code</a></p></div>
+      </article>
+      <article class="card">
+        <a class="thumb" href="demos/emergency-response-platform-demo.mp4" aria-label="Watch the Response Grid demo video"><img src="demos/emergency-response-platform-demo.gif" alt="Animated preview of Response Grid" loading="lazy" /><span class="play">Watch demo</span></a>
+        <div class="body"><p class="kicker">Real-time emergency dispatch</p><h3>Response Grid</h3><p>Dispatchers create incidents, assign units and post updates that reach every connected client instantly over SignalR, with an incident timeline and map-ready coordinates.</p><ul class="tags"><li>C#</li><li>ASP.NET Core 8</li><li>SignalR</li><li>React</li><li>PostgreSQL</li><li>Docker</li></ul>
+          <p class="links"><a href="demos/emergency-response-platform-demo.mp4">Demo video</a><a href="https://github.com/Matthew-Uhlar/emergency-response-platform">Source code</a></p></div>
+      </article>
+      <article class="card">
+        <a class="thumb" href="demos/signalready-demo.mp4" aria-label="Watch the SignalReady demo video"><img src="demos/signalready-demo.gif" alt="Animated preview of SignalReady" loading="lazy" /><span class="play">Watch demo</span></a>
+        <div class="body"><p class="kicker">Predictive maintenance ML studio</p><h3>SignalReady</h3><p>ABB Accelerator Hackathon 2026 solo build. Checks data readiness, catches label-leaking columns, compares models on held-out data and explains what the model relied on.</p><ul class="tags"><li>Python</li><li>scikit-learn</li><li>pandas</li><li>Streamlit</li><li>pytest</li></ul>
+          <p class="links"><a href="demos/signalready-demo.mp4">Demo video</a><a href="https://github.com/Matthew-Uhlar/signalready">Source code</a></p></div>
+      </article>
+      <article class="card">
+        <a class="thumb" href="demos/enterprise-inventory-system-demo.mp4" aria-label="Watch the StockPilot demo video"><img src="demos/enterprise-inventory-system-demo.gif" alt="Animated preview of StockPilot" loading="lazy" /><span class="play">Watch demo</span></a>
+        <div class="body"><p class="kicker">Inventory and asset management</p><h3>StockPilot</h3><p>Inventory with reorder alerts, asset assignments and a purchase request approval workflow with role based permissions.</p><ul class="tags"><li>C#</li><li>ASP.NET Core 8</li><li>React</li><li>TypeScript</li><li>PostgreSQL</li></ul>
+          <p class="links"><a href="demos/enterprise-inventory-system-demo.mp4">Demo video</a><a href="https://github.com/Matthew-Uhlar/enterprise-inventory-system">Source code</a></p></div>
+      </article>
+      <article class="card">
+        <a class="thumb" href="demos/sentinelhash-demo.mp4" aria-label="Watch the SentinelHash demo video"><img src="demos/sentinelhash-demo.gif" alt="Animated preview of SentinelHash" loading="lazy" /><span class="play">Watch demo</span></a>
+        <div class="body"><p class="kicker">File integrity monitor</p><h3>SentinelHash</h3><p>Rust CLI that baselines a directory with parallel SHA-256 hashing and reports added, modified and deleted files as text or JSON.</p><ul class="tags"><li>Rust</li><li>Rayon</li><li>Serde</li><li>Clap</li></ul>
+          <p class="links"><a href="demos/sentinelhash-demo.mp4">Demo video</a><a href="https://github.com/Matthew-Uhlar/sentinelhash">Source code</a></p></div>
+      </article>
         </div>
       </section>
-      <section id="projects" aria-labelledby="project-title">
-        <div class="section-heading">
-          <h2 id="project-title">Three problems. Three approaches.</h2>
-          <span>01 — 03</span>
+      <section>
+        <div class="section-heading"><h2>More work</h2><span>Smaller tools, games and sites</span></div>
+        <div class="grid small">
+      <article class="mini">
+        <a class="thumb" href="demos/childcare-inventory-demo.mp4" aria-label="Watch the Childcare Inventory System demo video"><img src="demos/childcare-inventory-demo.gif" alt="Animated preview of Childcare Inventory System" loading="lazy" /></a>
+        <h3>Childcare Inventory System</h3><p>Flask app for a childcare center: low-stock alerts and supply request approvals.</p><ul class="tags"><li>Python</li><li>Flask</li><li>SQLite</li></ul><p class="links"><a href="demos/childcare-inventory-demo.mp4">Demo</a><a href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/projects/childcare-inventory-system">Code</a></p>
+      </article>
+      <article class="mini">
+        <a class="thumb" href="demos/application-tracker-demo.mp4" aria-label="Watch the Application Tracker demo video"><img src="demos/application-tracker-demo.gif" alt="Animated preview of Application Tracker" loading="lazy" /></a>
+        <h3>Application Tracker</h3><p>Job search pipeline with validated data and JSON backups, no runtime dependencies.</p><ul class="tags"><li>TypeScript</li><li>Node.js</li></ul><p class="links"><a href="demos/application-tracker-demo.mp4">Demo</a><a href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/application-tracker">Code</a></p>
+      </article>
+      <article class="mini">
+        <a class="thumb" href="demos/support-ticket-api-demo.mp4" aria-label="Watch the Support Ticket API demo video"><img src="demos/support-ticket-api-demo.gif" alt="Animated preview of Support Ticket API" loading="lazy" /></a>
+        <h3>Support Ticket API</h3><p>Standard-library Python API with SQLite transactions and integration tests.</p><ul class="tags"><li>Python</li><li>SQLite</li></ul><p class="links"><a href="demos/support-ticket-api-demo.mp4">Demo</a><a href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/support-ticket-api">Code</a></p>
+      </article>
+      <article class="mini">
+        <a class="thumb" href="demos/dependency-lens-demo.mp4" aria-label="Watch the Dependency Lens demo video"><img src="demos/dependency-lens-demo.gif" alt="Animated preview of Dependency Lens" loading="lazy" /></a>
+        <h3>Dependency Lens</h3><p>CLI that maps JS/TS imports and finds cycles with Tarjan&#39;s algorithm.</p><ul class="tags"><li>JavaScript</li><li>Node.js</li></ul><p class="links"><a href="demos/dependency-lens-demo.mp4">Demo</a><a href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/dependency-lens">Code</a></p>
+      </article>
+      <article class="mini">
+        <a class="thumb" href="demos/signal-siege-demo.mp4" aria-label="Watch the Signal Siege demo video"><img src="demos/signal-siege-demo.gif" alt="Animated preview of Signal Siege" loading="lazy" /></a>
+        <h3>Signal Siege</h3><p>Wave survival game with all graphics drawn in code.</p><ul class="tags"><li>Python</li><li>Pygame</li></ul><p class="links"><a href="demos/signal-siege-demo.mp4">Demo</a><a href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/projects/signal-siege">Code</a></p>
+      </article>
+      <article class="mini">
+        <a class="thumb" href="demos/prestige-construction-demo.mp4" aria-label="Watch the Prestige Construction demo video"><img src="demos/prestige-construction-demo.gif" alt="Animated preview of Prestige Construction" loading="lazy" /></a>
+        <h3>Prestige Construction</h3><p>Responsive marketing site for a Colorado general contractor.</p><ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>PHP</li></ul><p class="links"><a href="demos/prestige-construction-demo.mp4">Demo</a><a href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/projects/prestige-construction-website">Code</a></p>
+      </article>
         </div>
-        <article class="project">
-          <div class="number">01 / WEB APPLICATION</div>
-          <div>
-            <h3>Application Tracker</h3>
-            <p>
-              A focused place to keep track of job applications, next steps, and
-              progress. Data stays in the browser, with import and export for
-              moving it between devices.
-            </p>
-            <ul class="tags" aria-label="Technologies">
-              <li>TypeScript</li>
-              <li>JavaScript</li>
-              <li>HTML / CSS</li>
-            </ul>
-            <a
-              class="project-link"
-              href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/application-tracker"
-              >Read the code &amp; setup guide
-              <span aria-hidden="true">↗</span></a
-            >
-          </div>
-          <div class="detail">
-            <h4>Engineering focus</h4>
-            <p>
-              Input validation<br />Accessible interactions<br />Local
-              persistence
-            </p>
-          </div>
-        </article>
-        <article class="project">
-          <div class="number">02 / BACKEND SERVICE</div>
-          <div>
-            <h3>Support Ticket API</h3>
-            <p>
-              A small ticket service with a relational database, comments, and
-              explicit status transitions. Built to make request handling and
-              data rules easy to inspect.
-            </p>
-            <ul class="tags" aria-label="Technologies">
-              <li>Python</li>
-              <li>SQLite</li>
-              <li>HTTP / JSON</li>
-            </ul>
-            <a
-              class="project-link"
-              href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/support-ticket-api"
-              >Read the code &amp; setup guide
-              <span aria-hidden="true">↗</span></a
-            >
-          </div>
-          <div class="detail">
-            <h4>Engineering focus</h4>
-            <p>
-              Relational data<br />API error handling<br />Integration tests
-            </p>
-          </div>
-        </article>
-        <article class="project">
-          <div class="number">03 / DEVELOPER TOOL</div>
-          <div>
-            <h3>Dependency Lens</h3>
-            <p>
-              A command-line tool for seeing how source files fit together. Find
-              circular dependencies and unresolved local imports without
-              executing the code being scanned.
-            </p>
-            <ul class="tags" aria-label="Technologies">
-              <li>JavaScript</li>
-              <li>Node.js</li>
-              <li>Graph algorithms</li>
-            </ul>
-            <a
-              class="project-link"
-              href="https://github.com/Matthew-Uhlar/Portfolio/tree/main/showcase/dependency-lens"
-              >Read the code &amp; setup guide
-              <span aria-hidden="true">↗</span></a
-            >
-          </div>
-          <div class="detail">
-            <h4>Engineering focus</h4>
-            <p>Import resolution<br />Cycle detection<br />CLI usability</p>
-          </div>
-        </article>
       </section>
-      <section class="about" aria-labelledby="about-title">
-        <p class="eyebrow">HOW I APPROACH A PROJECT</p>
-        <h2 id="about-title">
-          Make it work.<br />Then make it understandable.
-        </h2>
-        <div>
-          <p>
-            I like projects with a concrete problem and a clear way to check the
-            result. These examples include setup instructions, sample data,
-            tests, and notes about what I would improve next.
-          </p>
-          <p>
-            They’re portfolio projects built with AI assistance, not production
-            or client work. The code and tradeoffs are open for review.
-          </p>
-          <a href="https://github.com/Matthew-Uhlar"
-            >Find me on GitHub <span aria-hidden="true">↗</span></a
-          >
-        </div>
+      <section class="about">
+        <h2>How I work</h2>
+        <p>I like projects with a concrete problem and a clear way to check the result. Each repository has setup instructions, sample data, tests where they matter and notes about what I would improve next. The demos are recorded automatically by a GitHub Actions workflow that builds and drives each app, so what you see is the code in the repository running. These are portfolio projects built with AI-assisted tooling, not claims of production deployments.</p>
       </section>
     </main>
-    <footer class="wrap">
-      <span>Matthew Uhlar · Software portfolio</span
-      ><span>Built with HTML &amp; CSS. No build step.</span>
-    </footer>
+    <footer class="wrap"><span>Matthew Uhlar &middot; Austin, TX</span><span><a href="mailto:mattuhlar@gmail.com">mattuhlar@gmail.com</a></span></footer>
   </body>
 </html>

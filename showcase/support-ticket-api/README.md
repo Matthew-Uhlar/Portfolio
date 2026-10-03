@@ -1,5 +1,9 @@
 # Support Ticket API
 
+[![Support Ticket API demo](https://raw.githubusercontent.com/Matthew-Uhlar/Portfolio/main/demos/support-ticket-api-demo.gif)](https://matthew-uhlar.github.io/Portfolio/demos/support-ticket-api-demo.mp4)
+
+**[Watch the full demo video (MP4)](https://matthew-uhlar.github.io/Portfolio/demos/support-ticket-api-demo.mp4)** | Integration tests, then a real curl session: list, create, move through the status workflow, a rejected invalid transition (409), comments and the reports endpoint.
+
 A small Python API for tracking support requests, with SQLite storage and no third-party dependencies. I kept the domain focused so the interesting parts are easy to inspect: status rules, input validation, transactions, and HTTP tests.
 
 ## Run it

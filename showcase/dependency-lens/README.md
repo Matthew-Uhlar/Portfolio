@@ -1,5 +1,9 @@
 # Dependency Lens
 
+[![Dependency Lens demo](https://raw.githubusercontent.com/Matthew-Uhlar/Portfolio/main/demos/dependency-lens-demo.gif)](https://matthew-uhlar.github.io/Portfolio/demos/dependency-lens-demo.mp4)
+
+**[Watch the full demo video (MP4)](https://matthew-uhlar.github.io/Portfolio/demos/dependency-lens-demo.mp4)** | Analyzing a small TypeScript app: a circular dependency, an unresolved import, strict mode failing a CI-style run and Mermaid export.
+
 A dependency-free command-line tool that maps local JavaScript and TypeScript imports. It reports circular dependency groups and unresolved relative imports, and can export a graph as JSON or Mermaid.
 
 I wanted a small tool that makes a project's structure easier to inspect before changing it. The implementation is intentionally readable: directory traversal, import extraction, resolution, graph analysis, and presentation are separate steps. It reads source files as text and never executes them.
