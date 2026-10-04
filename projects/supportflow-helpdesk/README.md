@@ -6,12 +6,14 @@
 
 SupportFlow is a help desk and service request platform I built with Java and Spring Boot. I wanted a project that felt closer to the type of software a real company would use instead of another basic CRUD application.
 
-The application gives employees a way to submit support tickets and gives support staff a structured workflow for assigning, prioritizing and resolving them. I also added authentication, role-based permissions, reporting and audit history so the project demonstrates more than basic API development.
+The application gives employees a way to submit support tickets and gives support staff a structured workflow for assigning, prioritizing and resolving them. It has a React frontend for all three roles and a REST API you can also use directly. I also added authentication, role-based permissions, reporting and audit history so the project demonstrates more than basic API development.
 
 ## Main Features
 
+- React frontend: dashboard, ticket queue with search and filters, ticket detail with conversation, internal notes and history
 - JWT authentication
 - Employee, technician and administrator roles
+- Employees only see their own tickets, and internal technician notes are never sent to them
 - Ticket creation and assignment
 - Priority and status workflows
 - Comments and internal updates
@@ -21,7 +23,7 @@ The application gives employees a way to submit support tickets and gives suppor
 - PostgreSQL database
 - Swagger API documentation
 - Docker support
-- Unit and integration tests
+- Unit tests with JUnit 5 and Mockito, run on every push by GitHub Actions
 
 ## Tech Stack
 
@@ -36,6 +38,7 @@ The application gives employees a way to submit support tickets and gives suppor
 - JUnit 5
 - Mockito
 - OpenAPI / Swagger
+- React 18, TypeScript and Vite (frontend)
 
 ## Run With Docker
 
@@ -47,6 +50,7 @@ docker compose up --build
 
 Then open:
 
+- Application: http://localhost:5175
 - API: http://localhost:8090
 - Swagger: http://localhost:8090/swagger-ui.html
 
@@ -81,6 +85,22 @@ You will need Java 21 and PostgreSQL.
 mvn spring-boot:run
 ```
 
+In a second terminal, start the frontend (it proxies API calls to port 8090):
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Then open http://localhost:5175.
+
+## Run the Tests
+
+```bash
+mvn test
+```
+
 ## Why I Built It
 
 Java and Spring Boot show up in a lot of enterprise software roles. I built this project to demonstrate backend development, security, database design, testing and business workflow logic in one application.
@@ -92,6 +112,4 @@ Java and Spring Boot show up in a lot of enterprise software roles. I built this
 - Service level agreement tracking
 - Redis caching
 - WebSocket updates
-- React frontend
 - Azure or AWS deployment
-- GitHub Actions
