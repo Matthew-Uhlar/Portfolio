@@ -21,11 +21,13 @@ public class PurchaseRequestsController(AppDbContext db) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(PurchaseRequestCreate r)
     {
+        if(string.IsNullOrWhiteSpace(r.ItemName)||r.Quantity<1)return BadRequest(new{message="Enter an item name and a quantity of at least 1."});
         var id=int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);var pr=new PurchaseRequest{ItemName=r.ItemName,Quantity=r.Quantity,Reason=r.Reason,RequestedByUserId=id};db.Add(pr);await db.SaveChangesAsync();return Ok(pr);
     }
     [HttpPut("{id:int}/review"), Authorize(Roles="Admin")]
     public async Task<IActionResult> Review(int id, PurchaseRequestReview r)
     {
-        var pr=await db.PurchaseRequests.FindAsync(id);if(pr is null)return NotFound();if(!Enum.TryParse<RequestStatus>(r.Status,true,out var status))return BadRequest(new{message="Invalid status."});pr.Status=status;pr.ReviewNotes=r.ReviewNotes;pr.ReviewedAt=DateTime.UtcNow;await db.SaveChangesAsync();return Ok(pr);
+        var pr=await db.PurchaseRequests.FindAsync(id);if(pr is null)return NotFound();// TryParse alone also accepts numbers like "7", so make sure the value is a real status.
+        if(!Enum.TryParse<RequestStatus>(r.Status,true,out var status)||!Enum.IsDefined(status))return BadRequest(new{message="Invalid status."});pr.Status=status;pr.ReviewNotes=r.ReviewNotes;pr.ReviewedAt=DateTime.UtcNow;await db.SaveChangesAsync();return Ok(pr);
     }
 }
