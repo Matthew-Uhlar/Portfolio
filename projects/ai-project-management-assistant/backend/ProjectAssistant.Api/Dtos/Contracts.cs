@@ -43,3 +43,4 @@ public record StoryGenerationResponse(string Overview, IReadOnlyList<GeneratedSt
 public record StoryPointResponse(int SuggestedPoints, string Reasoning);
 public record SprintSummaryResponse(string Summary, IReadOnlyList<string> Highlights, IReadOnlyList<string> NextSteps);
 public record RiskReviewResponse(string OverallRisk, IReadOnlyList<string> Risks, IReadOnlyList<string> Recommendations);
+public record AiStatusResponse(string Provider);
