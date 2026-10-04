@@ -84,7 +84,7 @@ async def ai_pm(p, r):
         await r.click(p.get_by_role('button', name='Create sprint summary'), 2500)
         await r.scroll(350); await p.wait_for_timeout(1500)
     await step(p, 'risk', risk())
-    await r.cap('The AI layer sits behind an IAiPlanningService interface, so a hosted LLM provider can be swapped in', 3000)
+    await r.cap('The assistant runs on Claude when an API key is set and falls back to a built-in rules engine', 3000)
     await r.cap('Project Pilot  |  C#, ASP.NET Core 8, EF Core, PostgreSQL, React, TypeScript, Docker  |  ' + GH, 3000)
 
 
@@ -165,7 +165,59 @@ async def inventory(p, r):
     await r.cap('StockPilot  |  C#, ASP.NET Core 8, EF Core, PostgreSQL, React, TypeScript, Docker  |  ' + GH, 3000)
 
 
+async def supportflow_ui(p, r):
+    U = 'http://localhost:5175'
+    title = 'VPN drops every few minutes'
+    await p.goto(U + '/login'); await p.wait_for_timeout(1200)
+    await r.cap('SupportFlow: IT help desk  |  Java 21, Spring Boot 3, Spring Security, PostgreSQL, React + TypeScript', 2600)
+    async def employee():
+        await r.cap('Employees, technicians and admins each get a different view (JWT roles enforced by the API)', 400)
+        await r.click(p.get_by_role('button', name='Employee'), 2000)
+        await r.click(link(p, 'New ticket'), 1200)
+        await r.cap('An employee files a ticket', 300)
+        await r.type(p.get_by_label('What do you need help with?'), title, 40)
+        await r.type(p.get_by_label('Details'), 'Since this morning my VPN disconnects every 5 to 10 minutes. Restarting the laptop did not help.', 14)
+        await p.get_by_label('Priority').select_option('HIGH'); await p.wait_for_timeout(500)
+        await r.click(p.get_by_role('button', name='Submit ticket'), 300)
+        await p.get_by_text('Ticket was created.').wait_for(timeout=15000)
+        await r.cap('The ticket opens with its own conversation and a history of every change', 2500)
+        await r.click(p.get_by_role('button', name='Sign out'), 1200)
+    await step(p, 'employee', employee())
+    async def technician():
+        await r.click(p.get_by_role('button', name='Technician'), 2000)
+        await r.cap('Technicians see a queue of unassigned and critical work', 1800)
+        await r.click(link(p, 'All tickets'), 1300)
+        await r.cap('Search and filter the whole queue', 300)
+        await r.type(p.get_by_placeholder('Search by title or #id'), 'VPN', 90); await p.wait_for_timeout(1200)
+        await r.click(p.get_by_role('link', name=title).first, 1800)
+        await r.cap('Assign the ticket and move it through the status workflow', 300)
+        await p.get_by_label('Assign to').select_option(label='Demo Technician (Technician)'); await p.wait_for_timeout(1500)
+        await p.get_by_label('Status').select_option('IN_PROGRESS'); await p.wait_for_timeout(1500)
+        await r.type(p.get_by_label('Comment'), 'Thanks for the details. Can you try the wired network for an hour so we can rule out Wi-Fi?', 14)
+        await r.click(p.get_by_role('button', name='Post'), 1500)
+        await r.cap('Internal notes stay between technicians', 300)
+        await r.type(p.get_by_label('Comment'), 'Likely the 4.2 client update. Rolling back on one test machine.', 14)
+        await p.get_by_label('Internal note (hidden from the requester)').check(); await p.wait_for_timeout(500)
+        await r.click(p.get_by_role('button', name='Post'), 1800)
+        await r.scroll(300); await p.wait_for_timeout(1200)
+        await r.click(p.get_by_role('button', name='Sign out'), 1200)
+    await step(p, 'technician', technician())
+    async def employee_view():
+        await r.click(p.get_by_role('button', name='Employee'), 1800)
+        await r.click(p.get_by_role('link', name=title).first, 300)
+        await p.get_by_text('Thanks for the details').wait_for(timeout=15000)
+        await r.cap('Back as the employee: the reply is visible, the internal note is never sent to them', 3000)
+        await r.click(p.get_by_role('button', name='Sign out'), 1200)
+    await step(p, 'employee view', employee_view())
+    async def admin():
+        await r.click(p.get_by_role('button', name='Admin'), 2000)
+        await r.cap('Admins get dashboard reporting across every ticket', 2500)
+    await step(p, 'admin', admin())
+    await r.cap('SupportFlow  |  Java 21, Spring Boot 3, Spring Security, JPA, PostgreSQL, JUnit 5, React, TypeScript, Docker  |  ' + GH, 3000)
+
+
 async def supportflow():
+    # Earlier API-only terminal demo, kept for reference. The recorded demo now uses the React frontend (supportflow_ui).
     API = 'http://localhost:8090'
     env_file = '/tmp/sf.env'
     open(env_file, 'w').write('')
@@ -475,7 +527,8 @@ async def main():
     elif NAME == 'enterprise-inventory-system':
         await wait_for_http('http://localhost:5173/login'); await wait_for_http('http://localhost:8080/swagger/index.html'); await record(BASE, inventory)
     elif NAME == 'supportflow-helpdesk':
-        await supportflow()
+        await wait_for_http('http://localhost:8090/v3/api-docs'); await wait_for_http('http://localhost:5175/login')
+        await record(BASE, supportflow_ui)
     elif NAME == 'childcare-inventory':
         d = os.path.join(ROOT, 'projects/childcare-inventory-system')
         srv = bg('rm -f inventory.db && python3 -c "import app; app.init_db(); app.app.run(port=5055)"', cwd=d)
