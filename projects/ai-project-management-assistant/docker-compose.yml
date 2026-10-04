@@ -25,6 +25,10 @@ services:
       Jwt__Key: ThisIsADevelopmentKeyThatShouldBeChangedBeforeDeployment12345
       Jwt__Issuer: ProjectAssistant
       Jwt__Audience: ProjectAssistantClient
+      # Optional: set ANTHROPIC_API_KEY in your shell or a .env file to answer with Claude.
+      # Without it the assistant uses the built-in rules engine.
+      Ai__ApiKey: ${ANTHROPIC_API_KEY:-}
+      Ai__Model: ${ANTHROPIC_MODEL:-claude-haiku-4-5}
     ports:
       - "8080:8080"
     depends_on:
