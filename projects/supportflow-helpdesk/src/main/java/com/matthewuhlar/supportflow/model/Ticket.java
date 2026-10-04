@@ -1,5 +1,7 @@
 package com.matthewuhlar.supportflow.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -45,6 +47,10 @@ public class Ticket {
     @OrderBy("createdAt DESC")
     private List<TicketHistory> history = new ArrayList<>();
 
+    // Set per request for employees so internal technician notes are never sent to them.
+    @Transient
+    private boolean hideInternalNotes;
+
     public Long getId() { return id; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }
@@ -55,7 +61,19 @@ public class Ticket {
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
     public Instant getResolvedAt() { return resolvedAt; }
+    @JsonIgnore
     public List<TicketComment> getComments() { return comments; }
+
+    @JsonProperty("comments")
+    public List<TicketComment> getVisibleComments() {
+        return hideInternalNotes
+            ? comments.stream().filter(comment -> !comment.isInternal()).toList()
+            : comments;
+    }
+
+    @JsonIgnore
+    public boolean isHideInternalNotes() { return hideInternalNotes; }
+    public void setHideInternalNotes(boolean hideInternalNotes) { this.hideInternalNotes = hideInternalNotes; }
     public List<TicketHistory> getHistory() { return history; }
 
     public void setId(Long id) { this.id = id; }
