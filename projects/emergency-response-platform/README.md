@@ -80,6 +80,14 @@ To connect a real map provider later:
 3. Plot each incident by latitude and longitude.
 4. Add routing or travel time estimates for assigned units.
 
+## Tests
+
+```bash
+dotnet test backend/EmergencyResponse.Api.Tests
+```
+
+The tests run the incident and assignment controllers against an in-memory database and a recording SignalR hub. They check that assigning a unit dispatches the incident, that the same unit can't be assigned twice, that clearing frees the unit and that each change is broadcast to the right clients. GitHub Actions runs them on every push.
+
 ## Portfolio Notes
 
 This is an MVP. In a production version I would also add:
@@ -90,6 +98,4 @@ This is an MVP. In a production version I would also add:
 - File and photo uploads
 - Emergency service integrations
 - Audit export
-- Automated tests
 - Azure deployment
-- GitHub Actions CI/CD
