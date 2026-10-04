@@ -1,0 +1,36 @@
+name: Publish Project Pilot images
+
+# Builds the Project Pilot API and web images and pushes them to GitHub Container Registry,
+# where projects/ai-project-management-assistant/deploy/azure/deploy.sh picks them up.
+on:
+  push:
+    branches: [main]
+    paths: ['projects/ai-project-management-assistant/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: project-pilot-api
+            context: projects/ai-project-management-assistant/backend/ProjectAssistant.Api
+          - image: project-pilot-web
+            context: projects/ai-project-management-assistant/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sign in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      - name: Build and push
+        run: |
+          owner="$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
+          image="ghcr.io/${owner}/${{ matrix.image }}"
+          docker build \
+            --label "org.opencontainers.image.source=https://github.com/Matthew-Uhlar/ai-project-management-assistant" \
+            -t "${image}:latest" -t "${image}:${GITHUB_SHA::7}" "${{ matrix.context }}"
+          docker push --all-tags "${image}"
