@@ -19,6 +19,7 @@ This project is a full stack inventory management application that I built to de
 - Docker support
 - React and TypeScript frontend
 - ASP.NET Core backend
+- xUnit tests and GitHub Actions CI
 
 ## Why I Built It
 
@@ -35,3 +36,11 @@ http://localhost:5173
 
 Swagger:
 http://localhost:8080/swagger
+
+## Tests
+
+```bash
+dotnet test backend/Inventory.Api.Tests
+```
+
+The tests cover low-stock detection, search, the purchase request approval flow (staff only see their own requests, admins see all) and input validation. GitHub Actions runs them on every push.
