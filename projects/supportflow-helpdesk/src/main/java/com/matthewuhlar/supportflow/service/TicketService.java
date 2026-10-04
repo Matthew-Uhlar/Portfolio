@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TicketService {
@@ -35,9 +36,16 @@ public class TicketService {
 
     @Transactional(readOnly = true)
     public List<Ticket> getTickets(TicketStatus status, TicketPriority priority) {
+        UserAccount user = currentUserService.getCurrentUser();
         List<Ticket> tickets;
 
-        if (status != null) {
+        if (isEmployee(user)) {
+            // Employees only see the tickets they opened.
+            tickets = ticketRepository.findByCreatedByIdOrderByCreatedAtDesc(user.getId()).stream()
+                .filter(ticket -> status == null || ticket.getStatus() == status)
+                .filter(ticket -> priority == null || ticket.getPriority() == priority)
+                .toList();
+        } else if (status != null) {
             tickets = ticketRepository.findByStatusOrderByCreatedAtDesc(status);
         } else if (priority != null) {
             tickets = ticketRepository.findByPriorityOrderByCreatedAtDesc(priority);
@@ -45,7 +53,10 @@ public class TicketService {
             tickets = ticketRepository.findAll();
         }
 
-        tickets.forEach(this::loadDetails);
+        tickets.forEach(ticket -> {
+            loadDetails(ticket);
+            ticket.setHideInternalNotes(isEmployee(user));
+        });
         return tickets;
     }
 
@@ -53,6 +64,16 @@ public class TicketService {
     public Ticket getTicket(long id) {
         Ticket ticket = ticketRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("The ticket could not be found."));
+
+        UserAccount user = currentUserService.getCurrentUser();
+        if (isEmployee(user)) {
+            // Answer the same way as a missing ticket so employees can't probe other people's tickets.
+            if (ticket.getCreatedBy() == null || !Objects.equals(ticket.getCreatedBy().getId(), user.getId())) {
+                throw new ResourceNotFoundException("The ticket could not be found.");
+            }
+            ticket.setHideInternalNotes(true);
+        }
+
         loadDetails(ticket);
         return ticket;
     }
@@ -136,6 +157,10 @@ public class TicketService {
 
         addHistory(ticket, user, internal ? "An internal note was added." : "A comment was added.");
         return commentRepository.save(comment);
+    }
+
+    private static boolean isEmployee(UserAccount user) {
+        return user != null && user.getRole() == Role.EMPLOYEE;
     }
 
     private void addHistory(Ticket ticket, UserAccount user, String description) {
