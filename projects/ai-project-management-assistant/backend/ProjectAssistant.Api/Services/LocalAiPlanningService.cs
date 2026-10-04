@@ -3,8 +3,26 @@ using ProjectAssistant.Api.Models;
 
 namespace ProjectAssistant.Api.Services;
 
+/// <summary>
+/// Rules-based planning assistant. It needs no API key, so the app always works offline,
+/// and the hosted LLM service falls back to it whenever a call fails.
+/// </summary>
 public class LocalAiPlanningService : IAiPlanningService
 {
+    public string Provider => "Built-in rules engine";
+
+    public Task<StoryGenerationResponse> GenerateStoriesAsync(Project project, string featureIdea, CancellationToken cancellationToken = default) =>
+        Task.FromResult(GenerateStories(project, featureIdea));
+
+    public Task<StoryPointResponse> SuggestPointsAsync(string title, string description, string acceptanceCriteria, CancellationToken cancellationToken = default) =>
+        Task.FromResult(SuggestPoints(title, description, acceptanceCriteria));
+
+    public Task<SprintSummaryResponse> SummarizeSprintAsync(Sprint sprint, IReadOnlyList<WorkItem> items, CancellationToken cancellationToken = default) =>
+        Task.FromResult(SummarizeSprint(sprint, items));
+
+    public Task<RiskReviewResponse> ReviewRisksAsync(Project project, IReadOnlyList<WorkItem> items, CancellationToken cancellationToken = default) =>
+        Task.FromResult(ReviewRisks(project, items));
+
     public StoryGenerationResponse GenerateStories(Project project, string featureIdea)
     {
         var cleanIdea = featureIdea.Trim().TrimEnd('.');
