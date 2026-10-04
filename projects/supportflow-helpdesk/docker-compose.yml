@@ -28,5 +28,13 @@ services:
       database:
         condition: service_healthy
 
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5175:80"
+    depends_on:
+      - api
+
 volumes:
   supportflow_data:
