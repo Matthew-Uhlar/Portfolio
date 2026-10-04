@@ -36,6 +36,14 @@ export default function Assistant() {
   const [summary, setSummary] = useState<SummaryResponse | null>(null)
   const [sprint, setSprint] = useState<Sprint | null>(null)
   const [busy, setBusy] = useState('')
+  const [provider, setProvider] = useState('')
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    api<{ provider: string }>('/ai/status')
+      .then(value => setProvider(value.provider))
+      .catch(() => setProvider(''))
+  }, [])
 
   useEffect(() => {
     if (project) {
@@ -48,11 +56,14 @@ export default function Assistant() {
     event.preventDefault()
     if (!project) return
     setBusy('stories')
+    setError('')
     try {
       setStories(await api<StoryResponse>('/ai/generate-stories', {
         method: 'POST',
         body: JSON.stringify({ projectId: project.id, featureIdea: idea })
       }))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'The assistant could not answer right now.')
     } finally {
       setBusy('')
     }
@@ -61,11 +72,14 @@ export default function Assistant() {
   async function reviewRisk() {
     if (!project) return
     setBusy('risk')
+    setError('')
     try {
       setRisk(await api<RiskResponse>('/ai/risk-review', {
         method: 'POST',
         body: JSON.stringify({ projectId: project.id })
       }))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'The assistant could not answer right now.')
     } finally {
       setBusy('')
     }
@@ -74,11 +88,14 @@ export default function Assistant() {
   async function summarize() {
     if (!sprint) return
     setBusy('summary')
+    setError('')
     try {
       setSummary(await api<SummaryResponse>('/ai/sprint-summary', {
         method: 'POST',
         body: JSON.stringify({ sprintId: sprint.id })
       }))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'The assistant could not answer right now.')
     } finally {
       setBusy('')
     }
@@ -91,8 +108,11 @@ export default function Assistant() {
           <span className="eyebrow">Planning support</span>
           <h2>AI Assistant</h2>
           <p>Use the assistant for repetitive planning work while the team keeps control of the final decisions.</p>
+          {provider && <p className="muted">Answers by: {provider}</p>}
         </div>
       </header>
+
+      {error && <p className="error-message" role="alert">{error}</p>}
 
       <section className="assistant-grid">
         <article className="panel">
