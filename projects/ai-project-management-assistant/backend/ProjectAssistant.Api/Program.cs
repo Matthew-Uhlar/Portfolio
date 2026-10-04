@@ -56,7 +56,25 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<TokenService>();
-builder.Services.AddScoped<IAiPlanningService, LocalAiPlanningService>();
+// The planning assistant uses Claude when an API key is configured (Ai__ApiKey or ANTHROPIC_API_KEY)
+// and the built-in rules engine otherwise. The Claude service also falls back to the rules engine on errors.
+var aiOptions = builder.Configuration.GetSection(AiOptions.SectionName).Get<AiOptions>() ?? new AiOptions();
+if (string.IsNullOrWhiteSpace(aiOptions.ApiKey))
+{
+    aiOptions.ApiKey = builder.Configuration["ANTHROPIC_API_KEY"] ?? "";
+}
+
+builder.Services.AddSingleton(aiOptions);
+builder.Services.AddScoped<LocalAiPlanningService>();
+if (aiOptions.IsConfigured)
+{
+    builder.Services.AddHttpClient<IAiPlanningService, ClaudeAiPlanningService>(client =>
+        client.BaseAddress = new Uri(aiOptions.BaseUrl));
+}
+else
+{
+    builder.Services.AddScoped<IAiPlanningService>(services => services.GetRequiredService<LocalAiPlanningService>());
+}
 
 var jwtKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException("The JWT key is missing.");
