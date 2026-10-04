@@ -2,7 +2,7 @@
 
 [![SupportFlow demo](https://raw.githubusercontent.com/Matthew-Uhlar/Portfolio/main/demos/supportflow-helpdesk-demo.gif)](https://matthew-uhlar.github.io/Portfolio/demos/supportflow-helpdesk-demo.mp4)
 
-**[Watch the full demo video (MP4)](https://matthew-uhlar.github.io/Portfolio/demos/supportflow-helpdesk-demo.mp4)** | A real terminal session against the running API: an employee files a ticket and is blocked from changing its status, a technician escalates it (with audit history) and comments, then an admin filters tickets and checks the dashboard. Ends with the Swagger UI.
+**[Watch the full demo video (MP4)](https://matthew-uhlar.github.io/Portfolio/demos/supportflow-helpdesk-demo.mp4)** | An employee files a ticket in the React app, a technician finds it in the queue, assigns it, replies and adds an internal note, the employee sees the reply but never the note, then an admin checks the dashboard.
 
 SupportFlow is a help desk and service request platform I built with Java and Spring Boot. I wanted a project that felt closer to the type of software a real company would use instead of another basic CRUD application.
 
