@@ -57,7 +57,6 @@ jobs:
           - { name: csc500 }
           - { name: csc500-shopping-cart }
           - { name: signalready }
-          - { name: waymaker-inn }
     steps:
       - uses: actions/checkout@v4
         with:
